@@ -12,18 +12,33 @@ import ARKit
 import MobileCoreServices
 import VideoToolbox
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+protocol ImageHandler {
+    var imageAnchors: Set<ARReferenceImage> { get set }
+}
 
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, ImageHandler {
+
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet var photoButton: UIButton!
     var alertController: UIAlertController?
-    
+    //stuff for Registration History
+    let maximumHistoryLength = 15
+    var transpositionHistoryPoints: [CGPoint] = []
+    var previousPixelBuffer: CVPixelBuffer?
+    var motionManager = MotionManager()
+
+    lazy var model = ImageModel(with: self)
+
+    var timer: Timer?
+
     // Create a session configuration
     var configuration = ARImageTrackingConfiguration()
 
     var imageAnchors = Set<ARReferenceImage>() {
-            didSet {
+            didSet{
                 self.configuration.trackingImages = imageAnchors
+                print(imageAnchors)
                 sceneView.session.run(configuration)
             }
         }
@@ -43,12 +58,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the scene to the view
         sceneView.scene = scene
 
+        sceneView.session.delegate = self
+
         photoButton.addTarget(self, action: #selector(self.buttonPushed), for: UIControl.Event.touchUpInside)
         photoButton.addTarget(self, action: #selector(self.buttonReleased), for: UIControl.Event.touchDown)
 
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             print("Camera not available")
         }
+
+        motionManager.startAccelerometers()
     }
 
     @objc
@@ -93,7 +112,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let planeNode = SCNNode(geometry: plane)
         planeNode.eulerAngles.x = -.pi / 2
 
-        let label = SCNText(string: imageAnchor.referenceImage.name ?? "object", extrusionDepth: 0)
+        let name = (imageAnchor.referenceImage.name ?? "object").replacingOccurrences(of: " ", with: "\n")
+
+        let label = SCNText(string: name, extrusionDepth: 0)
         label.firstMaterial?.diffuse.contents = UIColor.white // UIColor.black
         label.firstMaterial?.specular.contents = UIColor.black
         label.firstMaterial?.shininess = 0.75
@@ -138,6 +159,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
         }
 
+        confirmAction.isEnabled = false
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
 
         alertController?.addTextField { textField in
@@ -161,5 +184,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
 
         alertController?.actions[0].isEnabled = count > 0
+    }
+
+    var found = false
+
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard !found && motionManager.isStable() else { return }
+        model.runModel(on: frame, addTo: &imageAnchors) { [weak self] in
+            guard let `self` = self else { return }
+            self.found = true
+            print("start")
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [weak self] _ in
+                print("stop")
+                self?.found = false
+            }
+        }
     }
 }
