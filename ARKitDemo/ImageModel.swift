@@ -10,17 +10,18 @@ import ARKit
 import Foundation
 import Vision
 
+// Handles the machine learning portion of the app
 class ImageModel {
     
     let model: VNCoreMLModel
     var vc: ImageHandler
+    // Connects the image anchors in the ViewController.  When these are updates, the images in
+    // the view controller are updated
     var imageAnchors: Set<ARReferenceImage> = [] {
-        didSet {
-            print("SETTING ANCHORS")
-            self.vc.imageAnchors = imageAnchors
-        }
+        didSet { self.vc.imageAnchors = imageAnchors.union(self.vc.imageAnchors) }
     }
-    
+
+    // Once images are detected, the labels are set in the view controller (image handler)
     init(with vc: ImageHandler) {
         do {
             self.model = try VNCoreMLModel(for: BetterImage().model)
@@ -31,7 +32,8 @@ class ImageModel {
         self.vc = vc
     }
 
-    func runModel(on frame: ARFrame, addTo imageAnchors: inout Set<ARReferenceImage>, closure: @escaping ()->()) {
+    // Runs the machine learning model and sets a label for the image on the screen for imageAnchors
+    func runModel(on frame: ARFrame, closure: @escaping ()->()) {
         let request = VNCoreMLRequest(model: model) { [weak self] finishedReq, err in
             guard
                 let `self` = self,
