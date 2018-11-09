@@ -45,37 +45,37 @@ class MotionManager: CMMotionManager {
     func startAccelerometers() {
         // Make sure the accelerometer hardware is available.
         guard self.motion.isAccelerometerAvailable else { return }
-        if self.motion.isAccelerometerAvailable {
-            self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
-            self.motion.startAccelerometerUpdates()
+
+        self.motion.accelerometerUpdateInterval = 1.0 / 30.0  // 60 Hz
+        self.motion.startAccelerometerUpdates()
+        
+        // Captures the gyroscope coordinates 60 times a second
+        self.timer = Timer(fire: Date(), interval: 1.0 / 30.0, repeats: true) { [weak self] timer in
+            // Get the accelerometer data.
+            guard
+                let `self` = self,
+                let data = self.motion.accelerometerData
+            else { return }
+
+            self.x.append(data.acceleration.x)
+            self.y.append(data.acceleration.y)
+            self.z.append(data.acceleration.z)
             
-            // Captures the gyroscope coordinates 60 times a second
-            self.timer = Timer(fire: Date(), interval: 1.0 / 60.0, repeats: true) { [weak self] timer in
-                // Get the accelerometer data.
-                guard
-                    let `self` = self,
-                    let data = self.motion.accelerometerData
-                    else { return }
-                self.x.append(data.acceleration.x)
-                self.y.append(data.acceleration.y)
-                self.z.append(data.acceleration.z)
-                
-                // These counts should be the same
-                assert(self.x.count == self.y.count && self.y.count == self.z.count)
-                
-                // Ensures we only have 60 capture points
-                while self.x.count > 60 || self.y.count > 60 || self.z.count > 60 {
-                    self.x.removeFirst()
-                    self.y.removeFirst()
-                    self.z.removeFirst()
-                }
-                
-                // The counts should still be the same and now less than or equal to 60
-                assert(self.x.count == self.y.count && self.y.count == self.z.count && self.z.count <= 60)
+            // These counts should be the same
+            assert(self.x.count == self.y.count && self.y.count == self.z.count)
+            
+            // Ensures we only have 60 capture points
+            while self.x.count > 60 || self.y.count > 30 || self.z.count > 30 {
+                self.x.removeFirst()
+                self.y.removeFirst()
+                self.z.removeFirst()
             }
             
-            // Add the timer to the current run loop.
-            RunLoop.current.add(self.timer!, forMode: RunLoop.Mode.default)
+            // The counts should still be the same and now less than or equal to 60
+            assert(self.x.count == self.y.count && self.y.count == self.z.count && self.z.count <= 30)
         }
+        
+        // Add the timer to the current run loop.
+        RunLoop.current.add(self.timer!, forMode: RunLoop.Mode.default)
     }
 }

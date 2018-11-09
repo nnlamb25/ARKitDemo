@@ -33,21 +33,16 @@ class ImageModel {
     }
 
     // Runs the machine learning model and sets a label for the image on the screen for imageAnchors
-    func runModel(on frame: ARFrame, closure: @escaping ()->()) {
-        let request = VNCoreMLRequest(model: model) { [weak self] finishedReq, err in
+    func runModel(on frame: ARFrame, closure: @escaping (String, ARFrame)->()) {
+        let request = VNCoreMLRequest(model: model) { finishedReq, err in
             guard
-                let `self` = self,
                 let results = finishedReq.results as? [VNClassificationObservation],
                 let firstObservation = results.first,
                 firstObservation.confidence > 0.8
             else { return }
 
             print("\(firstObservation.confidence): \(firstObservation.identifier)")
-
-            let arImage = ARReferenceImage(frame.capturedImage, orientation: CGImagePropertyOrientation.left, physicalWidth: 0.2)
-            arImage.name = firstObservation.identifier
-            self.imageAnchors = self.imageAnchors.union(Set([arImage]))
-            closure()
+            closure(firstObservation.identifier, frame)
         }
         
         try? VNImageRequestHandler(cvPixelBuffer: frame.capturedImage, options: [:]).perform([request])
