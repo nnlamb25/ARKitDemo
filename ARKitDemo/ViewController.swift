@@ -23,6 +23,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Im
     @IBOutlet var photoButton: UIButton!
     var alertController: UIAlertController?
     var motionManager = MotionManager()
+    lazy var translator = ROGoogleTranslate()
 
     @IBOutlet var stableAlert: UITextView!
 
@@ -159,8 +160,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Im
                 let label = self.alertController?.textFields?[0].text
             else { return }
 
-            arImage.name = label
-            self.imageAnchors = self.imageAnchors.union(Set([arImage]))
+            let params = ROGoogleTranslateParams(source: "en", target: "de", text: label)
+            
+            self.translator.translate(params: params) { translation in
+                arImage.name = label + " " + translation
+                self.imageAnchors = self.imageAnchors.union(Set([arImage]))
+                self.beginPredictingAgainAfter(3)
+            }
         }
 
         confirmAction.isEnabled = false
@@ -213,10 +219,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Im
 
             let confirmAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
                 guard let `self` = self else { return }
+
                 
-                arImage.name = label
-                self.imageAnchors = self.imageAnchors.union(Set([arImage]))
-                self.beginPredictingAgainAfter(3)
+                let params = ROGoogleTranslateParams(source: "en", target: "de", text: label)
+                
+                self.translator.translate(params: params) { translation in
+                    arImage.name = label + " " + translation
+                    self.imageAnchors = self.imageAnchors.union(Set([arImage]))
+                    self.beginPredictingAgainAfter(3)
+                }
             }
 
             confirmAction.isEnabled = true
@@ -229,9 +240,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Im
                         let label = self.alertController?.textFields?[0].text
                     else { return }
 
-                    arImage.name = label
-                    self.imageAnchors = self.imageAnchors.union(Set([arImage]))
-                    self.beginPredictingAgainAfter(3)
+                    let params = ROGoogleTranslateParams(source: "en", target: "de", text: label)
+                    
+                    self.translator.translate(params: params) { translation in
+                        arImage.name = label + " " + translation
+                        self.imageAnchors = self.imageAnchors.union(Set([arImage]))
+                        self.beginPredictingAgainAfter(3)
+                    }
                 }
                 
                 addLabel.isEnabled = false
