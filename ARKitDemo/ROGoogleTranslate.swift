@@ -10,10 +10,6 @@ import Foundation
 
 public struct ROGoogleTranslateParams {
     
-    public init() {
-        
-    }
-    
     public init(source:String, target:String, text:String) {
         self.source = source
         self.target = target
@@ -22,7 +18,7 @@ public struct ROGoogleTranslateParams {
     
     public var source = "en"
     public var target = "de"
-    public var text = "Hallo"
+    public var text = "Hello, World!"
 }
 
 
@@ -45,7 +41,7 @@ open class ROGoogleTranslate {
             ddosGuard,
             let urlEncodedText = params.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=\(apiKey)&q=\(urlEncodedText)&source=\(params.source)&target=\(params.target)&format=text")
-        else { print("Could not make URL"); return }
+        else { callback(nil); return }
         
         let httprequest = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -83,9 +79,12 @@ open class ROGoogleTranslate {
                 callback(nil)
             }
         }
-        
+
+        ddosGuard = false
         httprequest.resume()
 
-        // TODO: Add timer for DDOS Guard to not ddos url
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [weak self] _ in
+            self?.ddosGuard = true
+        }
     }
 }
