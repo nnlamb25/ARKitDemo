@@ -24,70 +24,33 @@
                                 <rect key="frame" x="138" y="772" width="138" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Hold to scan"/>
+                                <state key="normal" title="Press to Label"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHC-iZ-NFy">
-                                <rect key="frame" x="332" y="776" width="62" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="4vf-aJ-WWs"/>
-                                </constraints>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="titleShadowOffset" width="100" height="100"/>
-                                <state key="normal" image="camera">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
                                 <connections>
-                                    <action selector="takePhoto" destination="BV1-FR-VrT" eventType="touchUpInside" id="I2L-qk-9Uc"/>
+                                    <action selector="takePhoto" destination="BV1-FR-VrT" eventType="touchUpInside" id="7Hm-1H-CBP"/>
                                 </connections>
                             </button>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" text="HOLD YOUR PHONE STABLE" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ykm-rA-SpX">
-                                <rect key="frame" x="39.666666666666657" y="44" width="335" height="44"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="sCJ-35-vaj"/>
-                                </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ykm-rA-SpX" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="2K2-G2-NLc"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="CQz-gX-wSn" secondAttribute="bottom" constant="25" id="6nr-rj-Vhu"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="uHC-iZ-NFy" secondAttribute="trailing" constant="20" id="7Ix-yK-0Ct"/>
-                            <constraint firstItem="uHC-iZ-NFy" firstAttribute="leading" secondItem="CQz-gX-wSn" secondAttribute="trailing" constant="56" id="7sg-4l-TZQ"/>
-                            <constraint firstItem="ykm-rA-SpX" firstAttribute="width" secondItem="BrB-h1-WRS" secondAttribute="width" constant="-79" id="Cqs-pm-0Oz"/>
-                            <constraint firstItem="ykm-rA-SpX" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="EgH-5l-rgb"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="CQz-gX-wSn" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="728" id="L3c-Ol-FBP"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="uHC-iZ-NFy" secondAttribute="trailing" constant="20" id="Q1b-Pd-Xam"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" constant="34" id="VpT-BR-CcM"/>
                             <constraint firstItem="CQz-gX-wSn" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="Xce-Vm-Cqe"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
-                            <constraint firstItem="uHC-iZ-NFy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CQz-gX-wSn" secondAttribute="trailing" id="l8A-n3-Kb5"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="uHC-iZ-NFy" secondAttribute="bottom" constant="25" id="vm2-mc-jFe"/>
                             <constraint firstItem="CQz-gX-wSn" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="138" id="zvg-je-WE8"/>
-                            <constraint firstItem="uHC-iZ-NFy" firstAttribute="bottom" secondItem="CQz-gX-wSn" secondAttribute="bottom" id="zxp-4W-Lrn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
-                        <outlet property="photoButton" destination="uHC-iZ-NFy" id="FiP-bP-H2B"/>
-                        <outlet property="scanButton" destination="CQz-gX-wSn" id="8Hr-Sc-N2t"/>
+                        <outlet property="labelerButton" destination="CQz-gX-wSn" id="aTG-B7-Y9O"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
-                        <outlet property="stableAlert" destination="ykm-rA-SpX" id="5lP-xB-iQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -95,7 +58,4 @@
             <point key="canvasLocation" x="100.00000000000001" y="20.758928571428569"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="camera" width="75" height="75"/>
-    </resources>
 </document>
