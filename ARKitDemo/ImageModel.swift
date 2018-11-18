@@ -14,37 +14,27 @@ import Vision
 class ImageModel {
     
     let model: VNCoreMLModel
-    var vc: ImageHandler
-    // Connects the image anchors in the ViewController.  When these are updates, the images in
-    // the view controller are updated
-    var imageAnchors: Set<ARReferenceImage> = [] {
-        didSet { self.vc.imageAnchors = imageAnchors.union(self.vc.imageAnchors) }
-    }
 
-    // Once images are detected, the labels are set in the view controller (image handler)
-    init(with vc: ImageHandler) {
+    init() {
         do {
             self.model = try VNCoreMLModel(for: BetterImage().model)
         } catch {
             fatalError("Could not find coreML model")
         }
-
-        self.vc = vc
     }
 
-    // Runs the machine learning model and sets a label for the image on the screen for imageAnchors
-    func runModel(on frame: ARFrame, closure: @escaping (String, ARFrame)->()) {
+    // Runs the machine learning model and returns value to closure
+    func runModel(on pixelBuffer: CVPixelBuffer, closure: @escaping (String, CVPixelBuffer)->()) {
         let request = VNCoreMLRequest(model: model) { finishedReq, err in
             guard
                 let results = finishedReq.results as? [VNClassificationObservation],
-                let firstObservation = results.first,
-                firstObservation.confidence > 0.8
+                let firstObservation = results.first
             else { return }
 
             print("\(firstObservation.confidence): \(firstObservation.identifier)")
-            closure(firstObservation.identifier, frame)
+            closure(firstObservation.identifier, pixelBuffer)
         }
         
-        try? VNImageRequestHandler(cvPixelBuffer: frame.capturedImage, options: [:]).perform([request])
+        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
     }
 }

@@ -30,14 +30,8 @@ public struct ROGoogleTranslateParams {
 open class ROGoogleTranslate {
     
     /// Store here the Google Translate API Key
-    public var apiKey = "***REMOVED***"
-    
-    ///
-    /// Initial constructor
-    ///
-    public init() {
-        
-    }
+    private var apiKey = "***REMOVED***"
+    private var ddosGuard = true
     
     ///
     /// Translate a phrase from one language into another
@@ -45,56 +39,53 @@ open class ROGoogleTranslate {
     /// - parameter params:   ROGoogleTranslate Struct contains all the needed parameters to translate with the Google Translate API
     /// - parameter callback: The translated string will be returned in the callback
     ///
-    open func translate(params:ROGoogleTranslateParams, callback:@escaping (_ translatedText:String) -> ()) {
+    open func translate(params:ROGoogleTranslateParams, callback: @escaping (_ translatedText: String?) -> ()) {
         
-        guard apiKey != "" else {
-            print("Warning: You should set the api key before calling the translate method.")
-            return
-        }
+        guard
+            ddosGuard,
+            let urlEncodedText = params.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=\(apiKey)&q=\(urlEncodedText)&source=\(params.source)&target=\(params.target)&format=text")
+        else { print("Could not make URL"); return }
         
-        if let urlEncodedText = params.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-            if let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=\(self.apiKey)&q=\(urlEncodedText)&source=\(params.source)&target=\(params.target)&format=text") {
-                
-                let httprequest = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                    guard error == nil else {
-                        print("Something went wrong: \(error?.localizedDescription)")
-                        return
-                    }
-                    
-                    if let httpResponse = response as? HTTPURLResponse {
-                        
-                        guard httpResponse.statusCode == 200 else {
-                            
-                            if let data = data {
-                                print("Response [\(httpResponse.statusCode)] - \(data)")
-                            }
-                            
-                            return
-                        }
-                        
-                        do {
-                            // Pyramid of optional json retrieving. I know with SwiftyJSON it would be easier, but I didn't want to add an external library
-                            if let data = data {
-                                if let json = try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
-                                    if let jsonData = json["data"] as? [String : Any] {
-                                        if let translations = jsonData["translations"] as? [NSDictionary] {
-                                            if let translation = translations.first as? [String : Any] {
-                                                if let translatedText = translation["translatedText"] as? String {
-                                                    callback(translatedText)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } catch {
-                            print("Serialization failed: \(error.localizedDescription)")
-                        }
-                    }
-                })
-                
-                httprequest.resume()
+        let httprequest = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Something went wrong: \(error.localizedDescription)")
+                callback(nil)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            
+            guard httpResponse.statusCode == 200 else {
+                guard let badData = data else { return }
+                print("Response [\(httpResponse.statusCode)] - \(badData)")
+                callback(nil)
+                return
+            }
+            
+            do {
+                guard
+                    let data = data,
+                    let json = try JSONSerialization.jsonObject(with: data,options:JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary,
+                    let jsonData = json["data"] as? [String : Any],
+                    let translations = jsonData["translations"] as? [NSDictionary],
+                    let translation = translations.first as? [String : Any],
+                    let translatedText = translation["translatedText"] as? String
+                else {
+                    print("Failed to get translation")
+                    callback(nil)
+                    return
+                }
+
+                callback(translatedText)
+            } catch {
+                print("Serialization failed: \(error.localizedDescription)")
+                callback(nil)
             }
         }
+        
+        httprequest.resume()
+
+        // TODO: Add timer for DDOS Guard to not ddos url
     }
 }
