@@ -31,8 +31,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                 sceneView.session.run(configuration)
             }
         }
-
-    private var translations: [ARReferenceImage: String] = [:]
     private var maxCharactersAllowedForLabel = 20
 
     override func viewDidLoad() {
@@ -91,6 +89,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     // MARK: - ARSCNViewDelegate
 
+    // Gets callsed when an image anchor is first detected on the screen
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
 
         let node = SCNNode()
@@ -124,34 +123,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         if imageAnchor.referenceImage.name == "ship" {
             let shipScene = SCNScene(named: "art.scnassets/ship.scn")!
             let shipNode = shipScene.rootNode.childNodes.first!
-            shipNode.position = SCNVector3Zero
-            shipNode.position.z = 0.15
+            shipNode.position = labelNode.position
+            shipNode.position.z += 0.05
             shipNode.eulerAngles.x = -.pi / 2
             node.addChildNode(shipNode)
         }
 
-        if let translation = translations[imageAnchor.referenceImage] {
+        if let translation = translator.translations[name] {
             node.addChildNode(makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
 
         return node
     }
 
+    // Gets called every frame an image anchor is being rendered
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        // Check if this label has a translation
         guard
+            node.childNodes.count < 2,
             let imageAnchor = anchor as? ARImageAnchor,
-            translations[imageAnchor.referenceImage] == nil,
             let label = imageAnchor.name
         else { return }
 
+        // If there was no translation, try to set it now
         let params = ROGoogleTranslateParams(source: "en", target: "de", text: label)
-        self.translator.translate(params: params) {[weak self] translation in
+        self.translator.translate(params: params) { [weak self] translation in
             guard
                 let `self` = self,
                 let translation = translation,
                 let labelNode = node.childNodes.first
             else { return }
-            self.translations[imageAnchor.referenceImage] = translation
+            self.translator.translations[label] = translation
             node.addChildNode(self.makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
     }
@@ -208,6 +210,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         }
     }
 
+    // Makes node for the translation label, position and scale should be from its label node
     private func makeTranslationNode(_ text: String, position: SCNVector3, scale: SCNVector3) -> SCNNode {
         let translationLabel = SCNText(string: text, extrusionDepth: 0)
         translationLabel.firstMaterial?.diffuse.contents = UIColor.green
@@ -224,17 +227,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         return translationNode
     }
 
+    // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
         let params = ROGoogleTranslateParams(source: "en", target: "de", text: text)
         self.translator.translate(params: params) { translation in
             if let translation = translation {
-                self.translations[arImage] = translation
+                self.translator.translations[text] = translation
             }
             arImage.name = text
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
         }
     }
 
+    // Ensures user cannot enter in an empty string
     @objc
     private func alertTextFieldDidChange(_ sender: UITextField) {
         guard let count = sender.text?.replacingOccurrences(of: " ", with: "").count else {
@@ -245,6 +250,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         alertController?.actions[0].isEnabled = count > 0
     }
 
+    // Ensures user cannot enter in too many characters
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentCharacterCount = textField.text?.count ?? 0
         guard range.length + range.location <= currentCharacterCount else { return false}
