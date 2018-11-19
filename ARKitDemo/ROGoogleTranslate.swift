@@ -25,6 +25,9 @@ public struct ROGoogleTranslateParams {
 /// Offers easier access to the Google Translate API
 open class ROGoogleTranslate {
     
+    // A dictionary of translations with their label as the key
+    var translations: [String: String] = [:]
+    
     /// Store here the Google Translate API Key
     private var apiKey = "***REMOVED***"
     private var ddosGuard = true
@@ -36,7 +39,13 @@ open class ROGoogleTranslate {
     /// - parameter callback: The translated string will be returned in the callback
     ///
     open func translate(params:ROGoogleTranslateParams, callback: @escaping (_ translatedText: String?) -> ()) {
-        
+        // Make sure we haven't already translated this before, if so just use that translation
+        if let repeatedTranslation = translations[params.text] {
+            callback(repeatedTranslation)
+            return
+        }
+
+
         guard
             ddosGuard,
             let urlEncodedText = params.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
