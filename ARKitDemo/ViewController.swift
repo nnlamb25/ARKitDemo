@@ -72,8 +72,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-//        imageAnchors = ARReferenceImage.referenceImages(inGroupNamed: "Photos", bundle: Bundle.main) ?? []
-
         configuration.maximumNumberOfTrackedImages = 4
 
         // Run the view's session
