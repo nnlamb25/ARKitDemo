@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="retina6_5" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,14 +14,14 @@
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="-130" width="414" height="866"/>
                             </arscnView>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQz-gX-wSn">
-                                <rect key="frame" x="138" y="772" width="138" height="65"/>
+                                <rect key="frame" x="146.66666666666666" y="642" width="120.99999999999997" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Press to Label"/>
@@ -37,14 +37,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="CQz-gX-wSn" secondAttribute="bottom" constant="25" id="6nr-rj-Vhu"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
-                            <constraint firstItem="CQz-gX-wSn" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="728" id="L3c-Ol-FBP"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" constant="34" id="VpT-BR-CcM"/>
-                            <constraint firstItem="CQz-gX-wSn" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="Xce-Vm-Cqe"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
-                            <constraint firstItem="CQz-gX-wSn" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="138" id="zvg-je-WE8"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="centerX" secondItem="CQz-gX-wSn" secondAttribute="centerX" id="KjL-zb-ueG"/>
+                            <constraint firstItem="CQz-gX-wSn" firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" constant="-59" id="WOb-3u-KST"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="i7f-ck-dOs"/>
+                            <constraint firstItem="CQz-gX-wSn" firstAttribute="centerX" secondItem="fQZ-KI-GVf" secondAttribute="centerX" id="jeL-1U-zSI"/>
+                            <constraint firstItem="CQz-gX-wSn" firstAttribute="centerY" secondItem="BrB-h1-WRS" secondAttribute="centerY" constant="356.5" id="o4M-xv-6Kd"/>
+                            <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" id="pwq-yG-evC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
