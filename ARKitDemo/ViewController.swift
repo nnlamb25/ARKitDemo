@@ -13,6 +13,11 @@ import UIKit
 import VideoToolbox
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
+    @IBAction func settingAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let secondVC = storyboard.instantiateViewController(withIdentifier: "SecondViewController")as!SecondViewController
+        self.navigationController?.pushViewController(secondVC, animated: true)
+    }
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet var labelerButton: UIButton!
@@ -35,7 +40,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Main"
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -71,7 +76,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         configuration.maximumNumberOfTrackedImages = 4
 
         // Run the view's session
@@ -79,6 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
         
         // Pause the view's session
@@ -255,4 +261,5 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let newLength = currentCharacterCount + string.count - range.length
         return newLength <= maxCharactersAllowedForLabel
     }
+    
 }
