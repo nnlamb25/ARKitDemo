@@ -78,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="1039.2" y="20.239880059970016"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Setting View Controller-->
         <scene sceneID="Jb0-Sa-vee">
             <objects>
-                <viewController storyboardIdentifier="SecondViewController" id="KYb-9A-pOi" customClass="SecondViewController" customModule="ARKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingViewController" id="KYb-9A-pOi" customClass="SettingViewController" customModule="ARKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oeh-9l-Jtl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

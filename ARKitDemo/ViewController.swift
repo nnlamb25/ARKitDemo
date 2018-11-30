@@ -15,7 +15,7 @@ import VideoToolbox
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
     @IBAction func settingAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let secondVC = storyboard.instantiateViewController(withIdentifier: "SecondViewController")as!SecondViewController
+        let secondVC = storyboard.instantiateViewController(withIdentifier: "SettingViewController")as!SettingViewController
         self.navigationController?.pushViewController(secondVC, animated: true)
     }
     
