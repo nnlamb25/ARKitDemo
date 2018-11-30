@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25922E2621AFD35800E72195 /* gear-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 25922E2521AFD35800E72195 /* gear-512.png */; };
+		25922E2821AFD39500E72195 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25922E2721AFD39500E72195 /* SecondViewController.swift */; };
 		3616588121A0A09C002F3F64 /* ROGoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */; };
 		367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367BA3332163FA1D00140314 /* AppDelegate.swift */; };
 		367BA3362163FA1D00140314 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 367BA3352163FA1D00140314 /* art.scnassets */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25922E2521AFD35800E72195 /* gear-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear-512.png"; sourceTree = "<group>"; };
+		25922E2721AFD39500E72195 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROGoogleTranslate.swift; sourceTree = "<group>"; };
 		367BA3302163FA1D00140314 /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367BA3332163FA1D00140314 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,12 +78,14 @@
 			children = (
 				367BA3372163FA1D00140314 /* ViewController.swift */,
 				368DE39E21828F7200CCD255 /* ImageModel.swift */,
+				25922E2521AFD35800E72195 /* gear-512.png */,
 				3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */,
 				36DD62E72181407600A3B19C /* BetterImage.mlmodel */,
 				367BA3392163FA1D00140314 /* Main.storyboard */,
 				367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */,
 				367BA3412163FA1E00140314 /* Info.plist */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
+				25922E2721AFD39500E72195 /* SecondViewController.swift */,
 			);
 			path = ARKitDemo;
 			sourceTree = "<group>";
@@ -144,6 +150,7 @@
 			files = (
 				367BA3362163FA1D00140314 /* art.scnassets in Resources */,
 				367BA3402163FA1E00140314 /* LaunchScreen.storyboard in Resources */,
+				25922E2621AFD35800E72195 /* gear-512.png in Resources */,
 				367BA33D2163FA1E00140314 /* Assets.xcassets in Resources */,
 				367BA33B2163FA1D00140314 /* Main.storyboard in Resources */,
 			);
@@ -156,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25922E2821AFD39500E72195 /* SecondViewController.swift in Sources */,
 				367BA3382163FA1D00140314 /* ViewController.swift in Sources */,
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
 				36DD62E82181407600A3B19C /* BetterImage.mlmodel in Sources */,
@@ -307,13 +315,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DGL9Y7U9AY;
+				DEVELOPMENT_TEAM = 45N9TGC9WF;
 				INFOPLIST_FILE = ARKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nnlamb25.ARKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danieldang.ARKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,13 +333,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DGL9Y7U9AY;
+				DEVELOPMENT_TEAM = 45N9TGC9WF;
 				INFOPLIST_FILE = ARKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nnlamb25.ARKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danieldang.ARKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
