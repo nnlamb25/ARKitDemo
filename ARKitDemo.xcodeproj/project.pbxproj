@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2537825E21B1103900E0203E /* LanguageViewController.swift */; };
 		25922E2621AFD35800E72195 /* gear-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 25922E2521AFD35800E72195 /* gear-512.png */; };
 		25922E2821AFD39500E72195 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25922E2721AFD39500E72195 /* SettingViewController.swift */; };
 		3616588121A0A09C002F3F64 /* ROGoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2537825E21B1103900E0203E /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		25922E2521AFD35800E72195 /* gear-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear-512.png"; sourceTree = "<group>"; };
 		25922E2721AFD39500E72195 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROGoogleTranslate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				367BA3412163FA1E00140314 /* Info.plist */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
 				25922E2721AFD39500E72195 /* SettingViewController.swift */,
+				2537825E21B1103900E0203E /* LanguageViewController.swift */,
 			);
 			path = ARKitDemo;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
 				36DD62E82181407600A3B19C /* BetterImage.mlmodel in Sources */,
 				367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */,
+				2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */,
 				3616588121A0A09C002F3F64 /* ROGoogleTranslate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

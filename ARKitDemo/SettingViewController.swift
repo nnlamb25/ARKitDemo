@@ -10,6 +10,11 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
+    @IBAction func selectLang(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let langVC = storyboard.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
+        self.navigationController?.pushViewController(langVC, animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
