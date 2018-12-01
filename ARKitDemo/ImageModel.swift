@@ -17,7 +17,7 @@ class ImageModel {
 
     init() {
         do {
-            self.model = try VNCoreMLModel(for: BetterImage().model)
+            self.model = try VNCoreMLModel(for: NewMLModel().model)
         } catch {
             fatalError("Could not find coreML model")
         }
