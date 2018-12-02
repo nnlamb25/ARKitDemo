@@ -12,6 +12,13 @@ import SceneKit
 import UIKit
 import VideoToolbox
 
+struct languageAPI {
+    static var languageKey = "Afrikaans"
+    static var languageValue = "af"
+    static var indexPath = 0
+}
+
+
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
     @IBAction func settingAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -140,9 +147,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             let imageAnchor = anchor as? ARImageAnchor,
             let label = imageAnchor.name
         else { return }
-
+        print(languageAPI.languageValue)
         // If there was no translation, try to set it now
-        let params = ROGoogleTranslateParams(source: "en", target: "de", text: label)
+        let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: label)
         self.translator.translate(params: params) { [weak self] translation in
             guard
                 let `self` = self,
@@ -225,7 +232,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
-        let params = ROGoogleTranslateParams(source: "en", target: "de", text: text)
+        print(languageAPI.languageValue)
+        let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: text)
         self.translator.translate(params: params) { translation in
             if let translation = translation {
                 self.translator.translations[text] = translation

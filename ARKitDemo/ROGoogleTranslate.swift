@@ -17,7 +17,7 @@ public struct ROGoogleTranslateParams {
     }
     
     public var source = "en"
-    public var target = "de"
+    public var target = languageAPI.languageValue
     public var text = "Hello, World!"
 }
 
