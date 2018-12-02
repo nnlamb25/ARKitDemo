@@ -13,8 +13,16 @@ import UIKit
 import VideoToolbox
 
 struct languageAPI {
-    static var languageKey = "Afrikaans"
-    static var languageValue = "af"
+    static var languageKey: String = UserDefaults.standard.string(forKey: "languageKey") ?? "Afrikaans" {
+        didSet {
+            UserDefaults.standard.set(languageKey, forKey: "languageKey")
+        }
+    }
+    static var languageValue: String = UserDefaults.standard.string(forKey: "languageValue") ?? "af" {
+        didSet {
+            UserDefaults.standard.set(languageValue, forKey: "languageValue")
+        }
+    }
     static var indexPath = 0
 }
 
@@ -132,7 +140,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         node.addChildNode(labelNode)
 
-        if let translation = translator.translations[name] {
+        if let translation = translator.translations[languageAPI.languageValue]?[name] {
             node.addChildNode(makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
 
@@ -232,7 +240,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
         print(languageAPI.languageValue)
-        let params = ROGoogleTranslateParams(source: "en", target: "de", text: text)
+        let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: text)
         self.translator.translate(params: params) { _ in
             arImage.name = text
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
