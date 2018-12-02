@@ -81,7 +81,8 @@ open class ROGoogleTranslate {
                     callback(nil)
                     return
                 }
-
+                self.translations[params.text] = translatedText
+                print("Translated '\(params.text)' from \(params.source) to '\(translatedText)' in \(params.target)")
                 callback(translatedText)
             } catch {
                 print("Serialization failed: \(error.localizedDescription)")

@@ -151,7 +151,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                 let translation = translation,
                 let labelNode = node.childNodes.first
             else { return }
-            self.translator.translations[label] = translation
             node.addChildNode(self.makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
     }
@@ -228,10 +227,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
         let params = ROGoogleTranslateParams(source: "en", target: "de", text: text)
-        self.translator.translate(params: params) { translation in
-            if let translation = translation {
-                self.translator.translations[text] = translation
-            }
+        self.translator.translate(params: params) { _ in
             arImage.name = text
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
         }
