@@ -22,6 +22,7 @@
 		E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */; };
 		E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4B21B343B6006E288A /* PetsML.mlmodel */; };
 		E085DC4F21B34BD6006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4E21B34BD6006E288A /* ModelViewController.swift */; };
+		E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC7A21B36D83006E288A /* ModelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewMLModel.mlmodel; sourceTree = "<group>"; };
 		E085DC4B21B343B6006E288A /* PetsML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PetsML.mlmodel; sourceTree = "<group>"; };
 		E085DC4E21B34BD6006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
+		E085DC7A21B36D83006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				367BA3322163FA1D00140314 /* ARKitDemo */,
 				367BA3312163FA1D00140314 /* Products */,
+				E085DC7921B36D74006E288A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +94,7 @@
 				E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */,
 				E085DC4B21B343B6006E288A /* PetsML.mlmodel */,
 				367BA3392163FA1D00140314 /* Main.storyboard */,
+				E085DC7A21B36D83006E288A /* ModelViewController.swift */,
 				367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */,
 				367BA3412163FA1E00140314 /* Info.plist */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
@@ -99,6 +103,14 @@
 				25AF7EA721B356CB00FED859 /* languageStruct.swift */,
 			);
 			path = ARKitDemo;
+			sourceTree = "<group>";
+		};
+		E085DC7921B36D74006E288A /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				E085DC4E21B34BD6006E288A /* ModelViewController.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +192,7 @@
 				E085DC4F21B34BD6006E288A /* ModelViewController.swift in Sources */,
 				E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */,
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
+				E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */,
 				367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */,
 				2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */,
 				E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */,
