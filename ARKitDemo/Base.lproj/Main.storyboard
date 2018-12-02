@@ -200,6 +200,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yNA-Vr-cHT"/>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="0nw-6T-tw4" id="jNm-2M-xaZ"/>
+                        <outlet property="tbView" destination="3hw-Aw-b4H" id="IHU-tj-aOM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHU-VI-lxj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
