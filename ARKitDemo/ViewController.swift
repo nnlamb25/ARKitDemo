@@ -124,15 +124,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
 
         node.addChildNode(labelNode)
-        
-        if imageAnchor.referenceImage.name == "ship" {
-            let shipScene = SCNScene(named: "art.scnassets/ship.scn")!
-            let shipNode = shipScene.rootNode.childNodes.first!
-            shipNode.position = labelNode.position
-            shipNode.position.z += 0.05
-            shipNode.eulerAngles.x = -.pi / 2
-            node.addChildNode(shipNode)
-        }
 
         if let translation = translator.translations[name] {
             node.addChildNode(makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
