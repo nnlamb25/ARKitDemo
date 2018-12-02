@@ -18,7 +18,10 @@
 		367BA33D2163FA1E00140314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33C2163FA1E00140314 /* Assets.xcassets */; };
 		367BA3402163FA1E00140314 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */; };
 		368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368DE39E21828F7200CCD255 /* ImageModel.swift */; };
-		36DD62E82181407600A3B19C /* BetterImage.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 36DD62E72181407600A3B19C /* BetterImage.mlmodel */; };
+		E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */; };
+		E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4B21B343B6006E288A /* PetsML.mlmodel */; };
+		E085DC4F21B34BD6006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4E21B34BD6006E288A /* ModelViewController.swift */; };
+		E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC7A21B36D83006E288A /* ModelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +38,10 @@
 		367BA33F2163FA1E00140314 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		367BA3412163FA1E00140314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		368DE39E21828F7200CCD255 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
-		36DD62E72181407600A3B19C /* BetterImage.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = BetterImage.mlmodel; path = ../../projectX/projectX/BetterImage.mlmodel; sourceTree = "<group>"; };
+		E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewMLModel.mlmodel; sourceTree = "<group>"; };
+		E085DC4B21B343B6006E288A /* PetsML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PetsML.mlmodel; sourceTree = "<group>"; };
+		E085DC4E21B34BD6006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
+		E085DC7A21B36D83006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 			children = (
 				367BA3322163FA1D00140314 /* ARKitDemo */,
 				367BA3312163FA1D00140314 /* Products */,
+				E085DC7921B36D74006E288A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,8 +89,10 @@
 				368DE39E21828F7200CCD255 /* ImageModel.swift */,
 				25922E2521AFD35800E72195 /* gear-512.png */,
 				3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */,
-				36DD62E72181407600A3B19C /* BetterImage.mlmodel */,
+				E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */,
+				E085DC4B21B343B6006E288A /* PetsML.mlmodel */,
 				367BA3392163FA1D00140314 /* Main.storyboard */,
+				E085DC7A21B36D83006E288A /* ModelViewController.swift */,
 				367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */,
 				367BA3412163FA1E00140314 /* Info.plist */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
@@ -91,6 +100,14 @@
 				2537825E21B1103900E0203E /* LanguageViewController.swift */,
 			);
 			path = ARKitDemo;
+			sourceTree = "<group>";
+		};
+		E085DC7921B36D74006E288A /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				E085DC4E21B34BD6006E288A /* ModelViewController.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,10 +185,13 @@
 			files = (
 				25922E2821AFD39500E72195 /* SettingViewController.swift in Sources */,
 				367BA3382163FA1D00140314 /* ViewController.swift in Sources */,
+				E085DC4F21B34BD6006E288A /* ModelViewController.swift in Sources */,
+				E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */,
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
-				36DD62E82181407600A3B19C /* BetterImage.mlmodel in Sources */,
+				E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */,
 				367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */,
 				2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */,
+				E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */,
 				3616588121A0A09C002F3F64 /* ROGoogleTranslate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,14 +339,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 45N9TGC9WF;
+				DEVELOPMENT_TEAM = 24NJ768TWH;
 				INFOPLIST_FILE = ARKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.danieldang.ARKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcfi3rce.ARKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -338,14 +358,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 45N9TGC9WF;
+				DEVELOPMENT_TEAM = 24NJ768TWH;
 				INFOPLIST_FILE = ARKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.danieldang.ARKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcfi3rce.ARKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -15,6 +15,12 @@ class SettingViewController: UIViewController {
         let langVC = storyboard.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
         self.navigationController?.pushViewController(langVC, animated: true)
     }
+    @IBAction func selectModel(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let modelVC = storyboard.instantiateViewController(withIdentifier: "ModelViewController") as! ModelViewController
+        self.navigationController?.pushViewController(modelVC, animated: true)
+    
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
