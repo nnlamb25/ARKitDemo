@@ -17,7 +17,7 @@ public struct ROGoogleTranslateParams {
     }
     
     public var source = "en"
-    public var target = "de"
+    public var target = languageAPI.languageValue
     public var text = "Hello, World!"
 }
 
@@ -29,7 +29,7 @@ open class ROGoogleTranslate {
     var translations: [String: String] = [:]
     
     /// Store here the Google Translate API Key
-    private var apiKey = "***REMOVED***"
+    private var apiKey = "**REMOVED**"
     private var ddosGuard = true
     
     ///

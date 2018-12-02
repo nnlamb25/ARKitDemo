@@ -12,8 +12,21 @@ import SceneKit
 import UIKit
 import VideoToolbox
 
+struct languageAPI {
+    static var languageKey = "Afrikaans"
+    static var languageValue = "af"
+    static var indexPath = 0
+}
+
+
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
+    @IBAction func settingAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let secondVC = storyboard.instantiateViewController(withIdentifier: "SettingViewController")as!SettingViewController
+        self.navigationController?.pushViewController(secondVC, animated: true)
+    }
     
+
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet var labelerButton: UIButton!
     var alertController: UIAlertController?
@@ -35,7 +48,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Main"
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -71,7 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         configuration.maximumNumberOfTrackedImages = 4
 
         // Run the view's session
@@ -79,6 +92,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
         
         // Pause the view's session
@@ -117,15 +131,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
 
         node.addChildNode(labelNode)
-        
-        if imageAnchor.referenceImage.name == "ship" {
-            let shipScene = SCNScene(named: "art.scnassets/ship.scn")!
-            let shipNode = shipScene.rootNode.childNodes.first!
-            shipNode.position = labelNode.position
-            shipNode.position.z += 0.05
-            shipNode.eulerAngles.x = -.pi / 2
-            node.addChildNode(shipNode)
-        }
 
         if let translation = translator.translations[name] {
             node.addChildNode(makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
@@ -142,9 +147,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             let imageAnchor = anchor as? ARImageAnchor,
             let label = imageAnchor.name
         else { return }
-
+        print(languageAPI.languageValue)
         // If there was no translation, try to set it now
-        let params = ROGoogleTranslateParams(source: "en", target: "de", text: label)
+        let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: label)
         self.translator.translate(params: params) { [weak self] translation in
             guard
                 let `self` = self,
@@ -226,6 +231,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
+        print(languageAPI.languageValue)
         let params = ROGoogleTranslateParams(source: "en", target: "de", text: text)
         self.translator.translate(params: params) { _ in
             arImage.name = text
@@ -251,4 +257,5 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let newLength = currentCharacterCount + string.count - range.length
         return newLength <= maxCharactersAllowedForLabel
     }
+    
 }
