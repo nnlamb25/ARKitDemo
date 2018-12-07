@@ -20,6 +20,7 @@
 		367BA33D2163FA1E00140314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33C2163FA1E00140314 /* Assets.xcassets */; };
 		367BA3402163FA1E00140314 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */; };
 		368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368DE39E21828F7200CCD255 /* ImageModel.swift */; };
+		4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4000F0D021BA574F00D297D5 /* StorageController.swift */; };
 		E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */; };
 		E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4B21B343B6006E288A /* PetsML.mlmodel */; };
 		E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC7A21B36D83006E288A /* ModelViewController.swift */; };
@@ -41,6 +42,7 @@
 		367BA33F2163FA1E00140314 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		367BA3412163FA1E00140314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		368DE39E21828F7200CCD255 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		4000F0D021BA574F00D297D5 /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewMLModel.mlmodel; sourceTree = "<group>"; };
 		E085DC4B21B343B6006E288A /* PetsML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PetsML.mlmodel; sourceTree = "<group>"; };
 		E085DC7A21B36D83006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
@@ -101,16 +103,25 @@
 				3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */,
 				367BA3392163FA1D00140314 /* Main.storyboard */,
 				36515C2521B4A02D00F6CA02 /* TranslationTableView.swift */,
+				4000F0D021BA574F00D297D5 /* StorageController.swift */,
 				36515C2721B4A25000F6CA02 /* TranslationTableViewCell.swift */,
 				36515C2921B4EDBE00F6CA02 /* LabeledImageViewController.swift */,
 				25922E2721AFD39500E72195 /* SettingViewController.swift */,
 				E085DC7A21B36D83006E288A /* ModelViewController.swift */,
 				2537825E21B1103900E0203E /* LanguageViewController.swift */,
 				367BA3412163FA1E00140314 /* Info.plist */,
+				4000F0D221BA80E900D297D5 /* UserImages */,
 				36515C2421B49AF100F6CA02 /* MLModels */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
 			);
 			path = ARKitDemo;
+			sourceTree = "<group>";
+		};
+		4000F0D221BA80E900D297D5 /* UserImages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +199,7 @@
 				25922E2821AFD39500E72195 /* SettingViewController.swift in Sources */,
 				367BA3382163FA1D00140314 /* ViewController.swift in Sources */,
 				36515C2621B4A02D00F6CA02 /* TranslationTableView.swift in Sources */,
+				4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */,
 				E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */,
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
 				E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */,
