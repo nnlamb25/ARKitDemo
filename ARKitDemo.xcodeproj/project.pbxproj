@@ -110,18 +110,10 @@
 				E085DC7A21B36D83006E288A /* ModelViewController.swift */,
 				2537825E21B1103900E0203E /* LanguageViewController.swift */,
 				367BA3412163FA1E00140314 /* Info.plist */,
-				4000F0D221BA80E900D297D5 /* UserImages */,
 				36515C2421B49AF100F6CA02 /* MLModels */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
 			);
 			path = ARKitDemo;
-			sourceTree = "<group>";
-		};
-		4000F0D221BA80E900D297D5 /* UserImages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UserImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -12,43 +12,61 @@ import UIKit
 import VideoToolbox
 
 public class StorageController {
-    
-    // Save an image with meta data to the photo album
-    public static func saveToPhotoAlbumWithMetadata(_ image: CGImage, label: String) {
-        let uuid = "TranslateAR_" + UUID().uuidString
-        let filePath = "/UserImages/\(uuid).jpg"
-        let cfPath = CFURLCreateWithFileSystemPath(nil, filePath as CFString, CFURLPathStyle.cfurlposixPathStyle, false)
-        
-        // You can change your exif type here.
-        let destination = CGImageDestinationCreateWithURL(cfPath!, "kUTTypeJPEG" as CFString, 1, nil)
-        
-        // Place your metadata here.
-        // Keep in mind that metadata follows a standard. You can not use custom property names here.
-        let tiffProperties = [
-            kCGImagePropertyTIFFImageDescription as String: label,
-            //kCGImagePropertyTIFFModel as String: "Your camera model"
-            ] as CFDictionary
-        
-        let properties = [
-            kCGImagePropertyExifDictionary as String: tiffProperties
-            ] as CFDictionary
-        
-        CGImageDestinationAddImage(destination!, image, properties)
-        CGImageDestinationFinalize(destination!)
-        
-//        try? PHPhotoLibrary.shared().performChangesAndWait {
-//            PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: filePath))
-//        }
-    }
+
+    private let fileManager = FileManager.default
+    private let userDefaults = UserDefaults.standard
+
+    let imagePathKey = "imagePaths"
     
     // Saved an image with its label
-    public static func saveImageWithLabel(pixelBuffer: CVPixelBuffer, label: String) {
+    public func saveImageWithLabel(pixelBuffer: CVPixelBuffer, label: String) {
         
         //Convert PixelBuffer to a CGImage
-        var image: CGImage?
-        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &image)
+        var cgImage: CGImage?
+        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
+        guard let image = cgImage else {
+            print("Could not save image")
+            return
+        }
+        let uiImage = UIImage(cgImage: image)
+        guard let imageData = uiImage.jpegData(compressionQuality: 1.0) else {
+            print("Could not save image")
+            return
+        }
         
         //Add metadata and save image
-        saveToPhotoAlbumWithMetadata(image!, label: label)
+        saveToPhotoAlbumWithMetadata(imageData, label: label)
+    }
+
+    // Save an image with meta data to the photo album
+    private func saveToPhotoAlbumWithMetadata(_ imageData: Data, label: String) {
+        let uuid = "\(label)_" + UUID().uuidString
+        let imageURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imagePath = imageURL.path
+        let filePath = imageURL.appendingPathComponent(uuid + ".jpg")
+        
+        do {
+            let files = try fileManager.contentsOfDirectory(atPath: "\(imagePath)")
+            for file in files {
+                if "\(imagePath)/\(file)" == filePath.path {
+                    try fileManager.removeItem(atPath: filePath.path)
+                }
+            }
+        } catch {
+            print("Could not add image from document directory: \(error)")
+        }
+        
+        do {
+            try imageData.write(to: filePath, options: .atomic)
+        } catch {
+            print("Could not write image to filePath: \(filePath.absoluteString)")
+        }
+
+        if var imageLabelDict = userDefaults.dictionary(forKey: imagePathKey) as? [String : String] {
+            imageLabelDict[filePath.absoluteString] = label
+            userDefaults.setValue(imageLabelDict, forKey: imagePathKey)
+        } else {
+            userDefaults.setValue([filePath.absoluteString: label], forKey: imagePathKey)
+        }
     }
 }

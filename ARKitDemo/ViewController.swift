@@ -40,11 +40,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     var alertController: UIAlertController?
     lazy var translator = ROGoogleTranslate()
     lazy var model = ImageModel()
+    lazy var storageContoller = StorageController()
 
     var timer: Timer?
 
     // Create a session configuration
     var configuration = ARImageTrackingConfiguration()
+
+    private var maxCharactersAllowedForLabel = 20
 
     var imageAnchors = Set<ARReferenceImage>() {
             didSet{
@@ -52,7 +55,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                 sceneView.session.run(configuration)
             }
         }
-    private var maxCharactersAllowedForLabel = 20
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +63,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/GameScene.scn")!
@@ -78,6 +80,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             print("Camera not available")
         }
+
+        loadImageAnchors()
     }
 
     @objc
@@ -123,7 +127,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         label.firstMaterial?.shininess = 0.75
 //            label.firstMaterial?.transparency = 0.4
         label.subdivisionLevel = 2
-        label.font = UIFont(name: "HelveticaNeue-Light", size: 10)
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 13)
 
         let labelNode = SCNNode(geometry: label)
         labelNode.position = node.position // SCNVector3(0.1, 0.3, 0)
@@ -179,7 +183,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             self.alertController = UIAlertController(title: label, message: "Is \"\(label)\" the correct label for this object?", preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
-                self?.translate(label, for: arImage)
+                guard let `self` = self else { return }
+                self.storageContoller.saveImageWithLabel(pixelBuffer: pixelBuffer, label: label)
+                self.translate(label, for: arImage)
             }
             
             confirmAction.isEnabled = true
@@ -191,6 +197,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                         let `self` = self,
                         let label = self.alertController?.textFields?[0].text
                     else { return }
+                    self.storageContoller.saveImageWithLabel(pixelBuffer: pixelBuffer, label: label)
                     self.translate(label, for: arImage)
                 }
                 
@@ -264,6 +271,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         guard range.length + range.location <= currentCharacterCount else { return false}
         let newLength = currentCharacterCount + string.count - range.length
         return newLength <= maxCharactersAllowedForLabel
+    }
+
+    private func loadImageAnchors() {
+//        guard let imagePathDict = UserDefaults.standard.dictionary(forKey: <#T##String#>)
     }
     
 }
