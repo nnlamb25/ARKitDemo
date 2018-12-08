@@ -33,8 +33,8 @@ open class ROGoogleTranslate {
     }
     
     /// Store here the Google Translate API Key
-    private var apiKey = "**Removed**"
-    private var ddosGuard = true
+    private static var apiKey = "**Removed**"
+    private static var ddosGuard = true
     
     ///
     /// Translate a phrase from one language into another
