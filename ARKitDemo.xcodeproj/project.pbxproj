@@ -23,7 +23,7 @@
 		4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4000F0D021BA574F00D297D5 /* StorageController.swift */; };
 		E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */; };
 		E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4B21B343B6006E288A /* PetsML.mlmodel */; };
-		E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC7A21B36D83006E288A /* ModelViewController.swift */; };
+		E085DC7D21B36E4A006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC7C21B36E4A006E288A /* ModelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +45,7 @@
 		4000F0D021BA574F00D297D5 /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewMLModel.mlmodel; sourceTree = "<group>"; };
 		E085DC4B21B343B6006E288A /* PetsML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PetsML.mlmodel; sourceTree = "<group>"; };
-		E085DC7A21B36D83006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
+		E085DC7C21B36E4A006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +102,7 @@
 				368DE39E21828F7200CCD255 /* ImageModel.swift */,
 				3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */,
 				367BA3392163FA1D00140314 /* Main.storyboard */,
+				367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */,
 				36515C2521B4A02D00F6CA02 /* TranslationTableView.swift */,
 				4000F0D021BA574F00D297D5 /* StorageController.swift */,
 				36515C2721B4A25000F6CA02 /* TranslationTableViewCell.swift */,
@@ -194,7 +195,7 @@
 				4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */,
 				E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */,
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
-				E085DC7B21B36D83006E288A /* ModelViewController.swift in Sources */,
+				E085DC7D21B36E4A006E288A /* ModelViewController.swift in Sources */,
 				367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */,
 				2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */,
 				36515C2A21B4EDBE00F6CA02 /* LabeledImageViewController.swift in Sources */,

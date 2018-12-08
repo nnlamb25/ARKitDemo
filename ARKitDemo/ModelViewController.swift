@@ -21,7 +21,9 @@ class ModelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Select Model"
-
+        self.tbView.delegate = self
+        self.tbView.dataSource = self
+        
         // Do any additional setup after loading the view.
     }
 
@@ -48,17 +50,37 @@ extension ModelViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if searching {
-            cell?.textLabel?.text = searchedModel[indexPath.row]
+            cell.textLabel?.text = searchedModel[indexPath.row]
         } else {
-            cell?.textLabel?.text = modelNameArr[indexPath.row]
+            cell.textLabel?.text = modelNameArr[indexPath.row]
         }
-        return cell!
+        
+        if (cell.textLabel?.text == SelectedMLModel.model) {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked")
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        //getting the current cell from the index path
+        let currentCell = tableView.cellForRow(at: indexPath!)! as UITableViewCell
+        
+        //getting the text of that cell
+        let currentItem = currentCell.textLabel!.text
+        
+        SelectedMLModel.model = currentItem ?? "Office"
+        SelectedMLModel.indexPath = (indexPath?.row)!
+        
+        currentCell.accessoryType = .checkmark
+        tableView.reloadData()
     }
     
 }
