@@ -40,10 +40,10 @@ public class StorageController {
 
     // Save an image with meta data to the photo album
     private func saveToPhotoAlbumWithMetadata(_ imageData: Data, label: String) {
-        let uuid = "\(label)_" + UUID().uuidString
         let imageURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let imagePath = imageURL.path
-        let filePath = imageURL.appendingPathComponent(uuid + ".jpg")
+        let uuid = "\(label)_" + UUID().uuidString + ".jpg"
+        let filePath = imageURL.appendingPathComponent(uuid)
         
         do {
             let files = try fileManager.contentsOfDirectory(atPath: "\(imagePath)")
@@ -59,14 +59,14 @@ public class StorageController {
         do {
             try imageData.write(to: filePath, options: .atomic)
         } catch {
-            print("Could not write image to filePath: \(filePath.absoluteString)")
+            print("Could not write image to filePath: \(filePath.path)")
         }
 
         if var imageLabelDict = userDefaults.dictionary(forKey: imagePathKey) as? [String : String] {
-            imageLabelDict[filePath.absoluteString] = label
+            imageLabelDict[uuid] = label
             userDefaults.setValue(imageLabelDict, forKey: imagePathKey)
         } else {
-            userDefaults.setValue([filePath.absoluteString: label], forKey: imagePathKey)
+            userDefaults.setValue([uuid: label], forKey: imagePathKey)
         }
     }
 }

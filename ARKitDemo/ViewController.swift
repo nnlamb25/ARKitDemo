@@ -48,6 +48,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     var configuration = ARImageTrackingConfiguration()
 
     private var maxCharactersAllowedForLabel = 20
+    private let fileManager = FileManager.default
 
     var imageAnchors = Set<ARReferenceImage>() {
             didSet{
@@ -159,7 +160,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             let imageAnchor = anchor as? ARImageAnchor,
             let label = imageAnchor.name
         else { return }
-        print(languageAPI.languageValue)
+//        print(languageAPI.languageValue)
         // If there was no translation, try to set it now
         let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: label)
         self.translator.translate(params: params) { [weak self] translation in
@@ -178,7 +179,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         model.runModel(on: pixelBuffer) { [weak self] label, image in
             guard let `self` = self else { return }
 
-            let arImage = ARReferenceImage(image, orientation: CGImagePropertyOrientation.left, physicalWidth: 0.2)
+            let arImage = ARReferenceImage(image, orientation: .left, physicalWidth: 0.2)
             
             self.alertController = UIAlertController(title: label, message: "Is \"\(label)\" the correct label for this object?", preferredStyle: .alert)
             
@@ -246,7 +247,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
-        print(languageAPI.languageValue)
+//        print(languageAPI.languageValue)
         let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: text)
         self.translator.translate(params: params) { _ in
             arImage.name = text
@@ -274,7 +275,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
 
     private func loadImageAnchors() {
-//        guard let imagePathDict = UserDefaults.standard.dictionary(forKey: <#T##String#>)
+        guard
+            let imagePathDict = UserDefaults.standard.dictionary(forKey: storageContoller.imagePathKey) as? [String: String],
+            let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+        else { return }
+
+        var images = Set<ARReferenceImage>()
+        for (path, label) in imagePathDict {
+            guard
+                let imageData = fileManager.contents(atPath: documentPath.appendingPathComponent(path).path),
+                let uiImage = UIImage(data: imageData),
+                let cgImage = uiImage.cgImage
+            else {
+                print("Could not convert image data at path: \(path) to image")
+                return
+            }
+            
+            let arReferenceImage = ARReferenceImage(cgImage, orientation: .left, physicalWidth: 0.2)
+            arReferenceImage.name = label
+            images.insert(arReferenceImage)
+        }
+        imageAnchors = images
+        
     }
     
 }
