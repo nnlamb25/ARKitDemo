@@ -49,7 +49,7 @@ class ImageModel {
     }
 
     // Runs the machine learning model and returns value to closure
-    func runModel(on pixelBuffer: CVPixelBuffer, closure: @escaping (String, CVPixelBuffer)->()) {
+    func runModel(on pixelBuffer: CVPixelBuffer, closure: @escaping (String, CVPixelBuffer, VNConfidence)->()) {
         let request = VNCoreMLRequest(model: model) { finishedReq, err in
             guard
                 let results = finishedReq.results as? [VNClassificationObservation],
@@ -57,7 +57,7 @@ class ImageModel {
             else { return }
 
             print("\(firstObservation.confidence): \(firstObservation.identifier)")
-            closure(firstObservation.identifier, pixelBuffer)
+            closure(firstObservation.identifier, pixelBuffer, firstObservation.confidence)
         }
         
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])

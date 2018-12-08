@@ -183,12 +183,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     @IBAction func takePhoto() {
         guard let pixelBuffer = sceneView.session.currentFrame?.capturedImage else { print("Failed to capture image"); return }
 
-        model.runModel(on: pixelBuffer) { [weak self] label, image in
+        model.runModel(on: pixelBuffer) { [weak self] label, image, confidence in
             guard let `self` = self else { return }
 
             let arImage = ARReferenceImage(image, orientation: .left, physicalWidth: 0.2)
+            let confidencePercentage = String(format: "%.2f", confidence * 100)
+            let message = "Is \"\(label)\" the correct label for this object? \n\n\(confidencePercentage)% confidence"
             
-            self.alertController = UIAlertController(title: label, message: "Is \"\(label)\" the correct label for this object?", preferredStyle: .alert)
+            self.alertController = UIAlertController(title: label, message: message, preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
                 guard let `self` = self else { return }
