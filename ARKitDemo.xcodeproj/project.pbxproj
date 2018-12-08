@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2537825E21B1103900E0203E /* LanguageViewController.swift */; };
-		25922E2621AFD35800E72195 /* gear-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 25922E2521AFD35800E72195 /* gear-512.png */; };
 		25922E2821AFD39500E72195 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25922E2721AFD39500E72195 /* SettingViewController.swift */; };
 		3616588121A0A09C002F3F64 /* ROGoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */; };
+		36515C2621B4A02D00F6CA02 /* TranslationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36515C2521B4A02D00F6CA02 /* TranslationTableView.swift */; };
+		36515C2821B4A25000F6CA02 /* TranslationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36515C2721B4A25000F6CA02 /* TranslationTableViewCell.swift */; };
+		36515C2A21B4EDBE00F6CA02 /* LabeledImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36515C2921B4EDBE00F6CA02 /* LabeledImageViewController.swift */; };
 		367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367BA3332163FA1D00140314 /* AppDelegate.swift */; };
 		367BA3362163FA1D00140314 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 367BA3352163FA1D00140314 /* art.scnassets */; };
 		367BA3382163FA1D00140314 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367BA3372163FA1D00140314 /* ViewController.swift */; };
@@ -18,6 +20,7 @@
 		367BA33D2163FA1E00140314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33C2163FA1E00140314 /* Assets.xcassets */; };
 		367BA3402163FA1E00140314 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */; };
 		368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368DE39E21828F7200CCD255 /* ImageModel.swift */; };
+		4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4000F0D021BA574F00D297D5 /* StorageController.swift */; };
 		E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */; };
 		E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4B21B343B6006E288A /* PetsML.mlmodel */; };
 		E085DC7D21B36E4A006E288A /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085DC7C21B36E4A006E288A /* ModelViewController.swift */; };
@@ -25,9 +28,11 @@
 
 /* Begin PBXFileReference section */
 		2537825E21B1103900E0203E /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
-		25922E2521AFD35800E72195 /* gear-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear-512.png"; sourceTree = "<group>"; };
 		25922E2721AFD39500E72195 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROGoogleTranslate.swift; sourceTree = "<group>"; };
+		36515C2521B4A02D00F6CA02 /* TranslationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTableView.swift; sourceTree = "<group>"; };
+		36515C2721B4A25000F6CA02 /* TranslationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTableViewCell.swift; sourceTree = "<group>"; };
+		36515C2921B4EDBE00F6CA02 /* LabeledImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledImageViewController.swift; sourceTree = "<group>"; };
 		367BA3302163FA1D00140314 /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367BA3332163FA1D00140314 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		367BA3352163FA1D00140314 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -37,6 +42,7 @@
 		367BA33F2163FA1E00140314 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		367BA3412163FA1E00140314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		368DE39E21828F7200CCD255 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		4000F0D021BA574F00D297D5 /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewMLModel.mlmodel; sourceTree = "<group>"; };
 		E085DC4B21B343B6006E288A /* PetsML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PetsML.mlmodel; sourceTree = "<group>"; };
 		E085DC7C21B36E4A006E288A /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
@@ -53,9 +59,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36515C2421B49AF100F6CA02 /* MLModels */ = {
+			isa = PBXGroup;
+			children = (
+				E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */,
+				E085DC4B21B343B6006E288A /* PetsML.mlmodel */,
+			);
+			path = MLModels;
+			sourceTree = "<group>";
+		};
 		366F629D21A1F84C00C9A108 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */,
 				367BA3332163FA1D00140314 /* AppDelegate.swift */,
 				367BA3352163FA1D00140314 /* art.scnassets */,
 				367BA33C2163FA1E00140314 /* Assets.xcassets */,
@@ -84,17 +100,19 @@
 			children = (
 				367BA3372163FA1D00140314 /* ViewController.swift */,
 				368DE39E21828F7200CCD255 /* ImageModel.swift */,
-				25922E2521AFD35800E72195 /* gear-512.png */,
 				3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */,
-				E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */,
-				E085DC4B21B343B6006E288A /* PetsML.mlmodel */,
 				367BA3392163FA1D00140314 /* Main.storyboard */,
-				E085DC7C21B36E4A006E288A /* ModelViewController.swift */,
 				367BA33E2163FA1E00140314 /* LaunchScreen.storyboard */,
-				367BA3412163FA1E00140314 /* Info.plist */,
-				366F629D21A1F84C00C9A108 /* Supporting Files */,
+				36515C2521B4A02D00F6CA02 /* TranslationTableView.swift */,
+				4000F0D021BA574F00D297D5 /* StorageController.swift */,
+				36515C2721B4A25000F6CA02 /* TranslationTableViewCell.swift */,
+				36515C2921B4EDBE00F6CA02 /* LabeledImageViewController.swift */,
 				25922E2721AFD39500E72195 /* SettingViewController.swift */,
+				E085DC7A21B36D83006E288A /* ModelViewController.swift */,
 				2537825E21B1103900E0203E /* LanguageViewController.swift */,
+				367BA3412163FA1E00140314 /* Info.plist */,
+				36515C2421B49AF100F6CA02 /* MLModels */,
+				366F629D21A1F84C00C9A108 /* Supporting Files */,
 			);
 			path = ARKitDemo;
 			sourceTree = "<group>";
@@ -159,7 +177,6 @@
 			files = (
 				367BA3362163FA1D00140314 /* art.scnassets in Resources */,
 				367BA3402163FA1E00140314 /* LaunchScreen.storyboard in Resources */,
-				25922E2621AFD35800E72195 /* gear-512.png in Resources */,
 				367BA33D2163FA1E00140314 /* Assets.xcassets in Resources */,
 				367BA33B2163FA1D00140314 /* Main.storyboard in Resources */,
 			);
@@ -174,13 +191,17 @@
 			files = (
 				25922E2821AFD39500E72195 /* SettingViewController.swift in Sources */,
 				367BA3382163FA1D00140314 /* ViewController.swift in Sources */,
+				36515C2621B4A02D00F6CA02 /* TranslationTableView.swift in Sources */,
+				4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */,
 				E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */,
 				368DE39F21828F7200CCD255 /* ImageModel.swift in Sources */,
 				E085DC7D21B36E4A006E288A /* ModelViewController.swift in Sources */,
 				367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */,
 				2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */,
+				36515C2A21B4EDBE00F6CA02 /* LabeledImageViewController.swift in Sources */,
 				E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */,
 				3616588121A0A09C002F3F64 /* ROGoogleTranslate.swift in Sources */,
+				36515C2821B4A25000F6CA02 /* TranslationTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,17 +348,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 24NJ768TWH;
+				DEVELOPMENT_TEAM = DGL9Y7U9AY;
 				INFOPLIST_FILE = ARKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mfi3rceARKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nnlamb25.ARKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -346,17 +367,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 24NJ768TWH;
+				DEVELOPMENT_TEAM = DGL9Y7U9AY;
 				INFOPLIST_FILE = ARKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mfi3rceARKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nnlamb25.ARKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

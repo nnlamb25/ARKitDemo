@@ -13,8 +13,16 @@ import UIKit
 import VideoToolbox
 
 struct languageAPI {
-    static var languageKey = "Afrikaans"
-    static var languageValue = "af"
+    static var languageKey: String = UserDefaults.standard.string(forKey: "languageKey") ?? "Afrikaans" {
+        didSet {
+            UserDefaults.standard.set(languageKey, forKey: "languageKey")
+        }
+    }
+    static var languageValue: String = UserDefaults.standard.string(forKey: "languageValue") ?? "af" {
+        didSet {
+            UserDefaults.standard.set(languageValue, forKey: "languageValue")
+        }
+    }
     static var indexPath = 0
 }
 
@@ -26,7 +34,7 @@ struct SelectedMLModel {
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
     @IBAction func settingAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let secondVC = storyboard.instantiateViewController(withIdentifier: "SettingViewController")as!SettingViewController
+        let secondVC = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
         self.navigationController?.pushViewController(secondVC, animated: true)
     }
     
@@ -36,11 +44,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     var alertController: UIAlertController?
     lazy var translator = ROGoogleTranslate()
     lazy var model = ImageModel()
+    lazy var storageContoller = StorageController()
 
     var timer: Timer?
 
     // Create a session configuration
     var configuration = ARImageTrackingConfiguration()
+
+    private var maxCharactersAllowedForLabel = 20
+    private let fileManager = FileManager.default
 
     var imageAnchors = Set<ARReferenceImage>() {
             didSet{
@@ -48,7 +60,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                 sceneView.session.run(configuration)
             }
         }
-    private var maxCharactersAllowedForLabel = 20
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +68,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/GameScene.scn")!
@@ -74,6 +85,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             print("Camera not available")
         }
+
+        loadImageAnchors()
     }
 
     @objc
@@ -120,7 +133,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         label.firstMaterial?.shininess = 0.75
 //            label.firstMaterial?.transparency = 0.4
         label.subdivisionLevel = 2
-        label.font = UIFont(name: "HelveticaNeue-Light", size: 10)
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 13)
 
         let labelNode = SCNNode(geometry: label)
         labelNode.position = node.position // SCNVector3(0.1, 0.3, 0)
@@ -137,7 +150,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         node.addChildNode(labelNode)
 
-        if let translation = translator.translations[name] {
+        if let translation = translator.translations[languageAPI.languageValue]?[name] {
             node.addChildNode(makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
 
@@ -152,7 +165,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             let imageAnchor = anchor as? ARImageAnchor,
             let label = imageAnchor.name
         else { return }
-        print(languageAPI.languageValue)
+//        print(languageAPI.languageValue)
         // If there was no translation, try to set it now
         let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: label)
         self.translator.translate(params: params) { [weak self] translation in
@@ -161,7 +174,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                 let translation = translation,
                 let labelNode = node.childNodes.first
             else { return }
-            self.translator.translations[label] = translation
             node.addChildNode(self.makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
     }
@@ -172,12 +184,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         model.runModel(on: pixelBuffer) { [weak self] label, image in
             guard let `self` = self else { return }
 
-            let arImage = ARReferenceImage(image, orientation: CGImagePropertyOrientation.left, physicalWidth: 0.2)
+            let arImage = ARReferenceImage(image, orientation: .left, physicalWidth: 0.2)
             
             self.alertController = UIAlertController(title: label, message: "Is \"\(label)\" the correct label for this object?", preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
-                self?.translate(label, for: arImage)
+                guard let `self` = self else { return }
+                self.storageContoller.saveImageWithLabel(pixelBuffer: pixelBuffer, label: label)
+                self.translate(label, for: arImage)
             }
             
             confirmAction.isEnabled = true
@@ -189,6 +203,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                         let `self` = self,
                         let label = self.alertController?.textFields?[0].text
                     else { return }
+                    self.storageContoller.saveImageWithLabel(pixelBuffer: pixelBuffer, label: label)
                     self.translate(label, for: arImage)
                 }
                 
@@ -237,12 +252,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
-        print(languageAPI.languageValue)
+//        print(languageAPI.languageValue)
         let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: text)
-        self.translator.translate(params: params) { translation in
-            if let translation = translation {
-                self.translator.translations[text] = translation
-            }
+        self.translator.translate(params: params) { _ in
             arImage.name = text
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
         }
@@ -265,6 +277,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         guard range.length + range.location <= currentCharacterCount else { return false}
         let newLength = currentCharacterCount + string.count - range.length
         return newLength <= maxCharactersAllowedForLabel
+    }
+
+    private func loadImageAnchors() {
+        guard
+            let imagePathDict = UserDefaults.standard.dictionary(forKey: storageContoller.imagePathKey) as? [String: String],
+            let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+        else { return }
+
+        var images = Set<ARReferenceImage>()
+        for (path, label) in imagePathDict {
+            guard
+                let imageData = fileManager.contents(atPath: documentPath.appendingPathComponent(path).path),
+                let uiImage = UIImage(data: imageData),
+                let cgImage = uiImage.cgImage
+            else {
+                print("Could not convert image data at path: \(path) to image")
+                return
+            }
+            
+            let arReferenceImage = ARReferenceImage(cgImage, orientation: .left, physicalWidth: 0.2)
+            arReferenceImage.name = label
+            images.insert(arReferenceImage)
+        }
+        imageAnchors = images
+        
     }
     
 }

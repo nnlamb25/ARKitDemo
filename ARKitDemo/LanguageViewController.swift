@@ -9,111 +9,111 @@
 import UIKit
 
 class LanguageViewController: UIViewController {
-    let langDict = ["Afrikaans" :    "af",
-                    "Albanian" :    "sq",
-                    "Amharic" :    "am",
-                    "Arabic" :    "ar",
-                    "Armenian" :    "hy",
-                    "Azerbaijani" :    "az",
-                    "Basque" :    "eu",
-                    "Belarusian" :    "be",
-                    "Bengali" :    "bn",
-                    "Bosnian" :    "bs",
-                    "Bulgarian" :    "bg",
-                    "Catalan" :    "ca",
-                    "Cebuano" :    "ceb",
-                    "Chinese (Simplified)" : "zh-CN",
-                    "Chinese (Traditional)" : "zh-TW",
-                    "Corsican" :    "co",
-                    "Croatian" :    "hr",
-                    "Czech" :    "cs",
-                    "Danish" :    "da",
-                    "Dutch" :    "nl",
-                    "English" :    "en",
-                    "Esperanto" :    "eo",
-                    "Estonian" :    "et",
-                    "Finnish" :    "fi",
-                    "French" :    "fr",
-                    "Frisian" :    "fy",
-                    "Galician" :    "gl",
-                    "Georgian" :    "ka",
-                    "German" :    "de",
-                    "Greek" :    "el",
-                    "Gujarati" :    "gu",
-                    "Haitian" : "le",
-                    "Hausa" :    "ha",
-                    "Hawaiian" :    "haw",
-                    "Hebrew" :    "he",
-                    "Hindi" :    "hi",
-                    "Hmong" :    "hmn",
-                    "Hungarian" :    "hu",
-                    "Icelandic" :    "is",
-                    "Igbo" :    "ig",
-                    "Indonesian" :    "id",
-                    "Irish" :    "ga",
-                    "Italian" :    "it",
-                    "Japanese" :    "ja",
-                    "Javanese" :    "jw",
-                    "Kannada" :    "kn",
-                    "Kazakh" :    "kk",
-                    "Khmer" :    "km",
-                    "Korean" :    "ko",
-                    "Kurdish" :    "ku",
-                    "Kyrgyz" :    "ky",
-                    "Lao" :    "lo",
-                    "Latin" :    "la",
-                    "Latvian" :    "lv",
-                    "Lithuanian" :    "lt",
-                    "Luxembourgish" :    "lb",
-                    "Macedonian" :    "mk",
-                    "Malagasy" :    "mg",
-                    "Malay" :    "ms",
-                    "Malayalam" :    "ml",
-                    "Maltese" :    "mt",
-                    "Maori" :    "mi",
-                    "Marathi" :    "mr",
-                    "Mongolian" :    "mn",
-                    "Myanmar" : "my",
-                    "Nepali" :    "ne",
-                    "Norwegian" :    "no",
-                    "Nyanja" : "ny",
-                    "Pashto" :    "ps",
-                    "Persian" :    "fa",
-                    "Polish" :    "pl",
-                    "Portuguese" : "pt",
-                    "Punjabi" :    "pa",
-                    "Romanian" :    "ro",
-                    "Russian" :    "ru",
-                    "Samoan" :    "sm",
-                    "Scots" : "gd",
-                    "Serbian" :    "sr",
-                    "Sesotho" :    "st",
-                    "Shona" :    "sn",
-                    "Sindhi" :    "sd",
-                    "Sinhala" : "si",
-                    "Slovak" :    "sk",
-                    "Slovenian" :    "sl",
-                    "Somali" :    "so",
-                    "Spanish" :    "es",
-                    "Sundanese" :    "su",
-                    "Swahili" :    "sw",
-                    "Swedish" :    "sv",
-                    "Tagalog" : "tl",
-                    "Tajik" :    "tg",
-                    "Tamil" :    "ta",
-                    "Telugu" :    "te",
-                    "Thai" :    "th",
-                    "Turkish" :    "tr",
-                    "Ukrainian" :    "uk",
-                    "Urdu" :    "ur",
-                    "Uzbek" :    "uz",
-                    "Vietnamese" :    "vi",
-                    "Welsh" :    "cy",
-                    "Xhosa" :    "xh",
-                    "Yiddish" :    "yi",
-                    "Yoruba" :    "yo",
-                    "Zulu" :    "zu"]
-
+    static let langDict = ["Afrikaans" :    "af",
+                           "Albanian" :    "sq",
+                           "Amharic" :    "am",
+                           "Arabic" :    "ar",
+                           "Armenian" :    "hy",
+                           "Azerbaijani" :    "az",
+                           "Basque" :    "eu",
+                           "Belarusian" :    "be",
+                           "Bengali" :    "bn",
+                           "Bosnian" :    "bs",
+                           "Bulgarian" :    "bg",
+                           "Catalan" :    "ca",
+                           "Cebuano" :    "ceb",
+                           "Chinese (Simplified)" : "zh-CN",
+                           "Chinese (Traditional)" : "zh-TW",
+                           "Corsican" :    "co",
+                           "Croatian" :    "hr",
+                           "Czech" :    "cs",
+                           "Danish" :    "da",
+                           "Dutch" :    "nl",
+                           "English" :    "en",
+                           "Esperanto" :    "eo",
+                           "Estonian" :    "et",
+                           "Finnish" :    "fi",
+                           "French" :    "fr",
+                           "Frisian" :    "fy",
+                           "Galician" :    "gl",
+                           "Georgian" :    "ka",
+                           "German" :    "de",
+                           "Greek" :    "el",
+                           "Gujarati" :    "gu",
+                           "Haitian" : "le",
+                           "Hausa" :    "ha",
+                           "Hawaiian" :    "haw",
+                           "Hebrew" :    "he",
+                           "Hindi" :    "hi",
+                           "Hmong" :    "hmn",
+                           "Hungarian" :    "hu",
+                           "Icelandic" :    "is",
+                           "Igbo" :    "ig",
+                           "Indonesian" :    "id",
+                           "Irish" :    "ga",
+                           "Italian" :    "it",
+                           "Japanese" :    "ja",
+                           "Javanese" :    "jw",
+                           "Kannada" :    "kn",
+                           "Kazakh" :    "kk",
+                           "Khmer" :    "km",
+                           "Korean" :    "ko",
+                           "Kurdish" :    "ku",
+                           "Kyrgyz" :    "ky",
+                           "Lao" :    "lo",
+                           "Latin" :    "la",
+                           "Latvian" :    "lv",
+                           "Lithuanian" :    "lt",
+                           "Luxembourgish" :    "lb",
+                           "Macedonian" :    "mk",
+                           "Malagasy" :    "mg",
+                           "Malay" :    "ms",
+                           "Malayalam" :    "ml",
+                           "Maltese" :    "mt",
+                           "Maori" :    "mi",
+                           "Marathi" :    "mr",
+                           "Mongolian" :    "mn",
+                           "Myanmar" : "my",
+                           "Nepali" :    "ne",
+                           "Norwegian" :    "no",
+                           "Nyanja" : "ny",
+                           "Pashto" :    "ps",
+                           "Persian" :    "fa",
+                           "Polish" :    "pl",
+                           "Portuguese" : "pt",
+                           "Punjabi" :    "pa",
+                           "Romanian" :    "ro",
+                           "Russian" :    "ru",
+                           "Samoan" :    "sm",
+                           "Scots" : "gd",
+                           "Serbian" :    "sr",
+                           "Sesotho" :    "st",
+                           "Shona" :    "sn",
+                           "Sindhi" :    "sd",
+                           "Sinhala" : "si",
+                           "Slovak" :    "sk",
+                           "Slovenian" :    "sl",
+                           "Somali" :    "so",
+                           "Spanish" :    "es",
+                           "Sundanese" :    "su",
+                           "Swahili" :    "sw",
+                           "Swedish" :    "sv",
+                           "Tagalog" : "tl",
+                           "Tajik" :    "tg",
+                           "Tamil" :    "ta",
+                           "Telugu" :    "te",
+                           "Thai" :    "th",
+                           "Turkish" :    "tr",
+                           "Ukrainian" :    "uk",
+                           "Urdu" :    "ur",
+                           "Uzbek" :    "uz",
+                           "Vietnamese" :    "vi",
+                           "Welsh" :    "cy",
+                           "Xhosa" :    "xh",
+                           "Yiddish" :    "yi",
+                           "Yoruba" :    "yo",
+                           "Zulu" :    "zu"]
+    
     var countryNameArr = [String]()
     
     var searchedCountry = [String]()
@@ -126,21 +126,21 @@ class LanguageViewController: UIViewController {
         self.title = "Select Languages"
         self.tbView.delegate = self
         self.tbView.dataSource = self
-        countryNameArr = Array(langDict.keys).sorted()
+        countryNameArr = Array(LanguageViewController.langDict.keys).sorted()
         // Do any additional setup after loading the view.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
@@ -167,7 +167,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = .none
         }
         
-    
+        
         return cell
     }
     
@@ -182,7 +182,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
         let currentItem = currentCell.textLabel!.text
         
         languageAPI.languageKey = currentItem ?? "Afrikaans"
-        languageAPI.languageValue = langDict[currentItem!] ?? "af"
+        languageAPI.languageValue = LanguageViewController.langDict[currentItem!] ?? "af"
         languageAPI.indexPath = (indexPath?.row)!
         currentCell.accessoryType = .checkmark
         tableView.reloadData()
@@ -204,4 +204,10 @@ extension LanguageViewController: UISearchBarDelegate {
         tbView.reloadData()
     }
     
+}
+
+extension Dictionary where Value: Equatable {
+    func allKeys(forValue value: Value) -> [Key] {
+        return self.filter { $1 == value }.map { $0.0 }
+    }
 }

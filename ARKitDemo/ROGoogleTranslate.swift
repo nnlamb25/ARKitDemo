@@ -26,7 +26,11 @@ public struct ROGoogleTranslateParams {
 open class ROGoogleTranslate {
     
     // A dictionary of translations with their label as the key
-    var translations: [String: String] = [:]
+    var translations: [String: [String: String]] = UserDefaults.standard.dictionary(forKey: "translations") as? [String: [String: String]] ?? [:]{
+        didSet {
+            UserDefaults.standard.set(translations, forKey: "translations")
+        }
+    }
     
     /// Store here the Google Translate API Key
     private var apiKey = "**Removed**"
@@ -40,7 +44,7 @@ open class ROGoogleTranslate {
     ///
     open func translate(params:ROGoogleTranslateParams, callback: @escaping (_ translatedText: String?) -> ()) {
         // Make sure we haven't already translated this before, if so just use that translation
-        if let repeatedTranslation = translations[params.text] {
+        if let repeatedTranslation = translations[params.target]?[params.text] {
             callback(repeatedTranslation)
             return
         }
@@ -73,8 +77,8 @@ open class ROGoogleTranslate {
                     let data = data,
                     let json = try JSONSerialization.jsonObject(with: data,options:JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary,
                     let jsonData = json["data"] as? [String : Any],
-                    let translations = jsonData["translations"] as? [NSDictionary],
-                    let translation = translations.first as? [String : Any],
+                    let translationData = jsonData["translations"] as? [NSDictionary],
+                    let translation = translationData.first as? [String : Any],
                     let translatedText = translation["translatedText"] as? String
                 else {
                     print("Failed to get translation")
@@ -82,6 +86,13 @@ open class ROGoogleTranslate {
                     return
                 }
 
+                if self.translations[params.target] == nil {
+                    self.translations[params.target] = [params.text: translatedText]
+                } else {
+                    self.translations[params.target]![params.text] = translatedText
+                }
+
+                print("Translated '\(params.text)' from \(params.source) to '\(translatedText)' in \(params.target)")
                 callback(translatedText)
             } catch {
                 print("Serialization failed: \(error.localizedDescription)")
