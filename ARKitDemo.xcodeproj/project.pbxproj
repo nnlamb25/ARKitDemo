@@ -20,6 +20,7 @@
 		367BA3382163FA1D00140314 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367BA3372163FA1D00140314 /* ViewController.swift */; };
 		367BA33B2163FA1D00140314 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367BA3392163FA1D00140314 /* Main.storyboard */; };
 		367BA33D2163FA1E00140314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367BA33C2163FA1E00140314 /* Assets.xcassets */; };
+		36E15F0521BB869200B640AA /* AlertTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E15F0421BB869200B640AA /* AlertTextFieldDelegate.swift */; };
 		4000F0D121BA574F00D297D5 /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4000F0D021BA574F00D297D5 /* StorageController.swift */; };
 		E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */; };
 		E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E085DC4B21B343B6006E288A /* PetsML.mlmodel */; };
@@ -41,6 +42,7 @@
 		367BA33C2163FA1E00140314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		367BA3412163FA1E00140314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		368DE39E21828F7200CCD255 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		36E15F0421BB869200B640AA /* AlertTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextFieldDelegate.swift; sourceTree = "<group>"; };
 		4000F0D021BA574F00D297D5 /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		E085DC4A21B343B6006E288A /* NewMLModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewMLModel.mlmodel; sourceTree = "<group>"; };
 		E085DC4B21B343B6006E288A /* PetsML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PetsML.mlmodel; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				3616588021A0A09C002F3F64 /* ROGoogleTranslate.swift */,
 				4000F0D021BA574F00D297D5 /* StorageController.swift */,
 				3633001C21BB7611009BE6E0 /* ModelViewController.swift */,
+				36E15F0421BB869200B640AA /* AlertTextFieldDelegate.swift */,
 				367BA3412163FA1E00140314 /* Info.plist */,
 				36515C2421B49AF100F6CA02 /* MLModels */,
 				366F629D21A1F84C00C9A108 /* Supporting Files */,
@@ -191,6 +194,7 @@
 				E085DC4D21B343B6006E288A /* PetsML.mlmodel in Sources */,
 				367BA3342163FA1D00140314 /* AppDelegate.swift in Sources */,
 				2537825F21B1103900E0203E /* LanguageViewController.swift in Sources */,
+				36E15F0521BB869200B640AA /* AlertTextFieldDelegate.swift in Sources */,
 				36515C2A21B4EDBE00F6CA02 /* LabeledImageViewController.swift in Sources */,
 				3633001D21BB7611009BE6E0 /* ModelViewController.swift in Sources */,
 				E085DC4C21B343B6006E288A /* NewMLModel.mlmodel in Sources */,

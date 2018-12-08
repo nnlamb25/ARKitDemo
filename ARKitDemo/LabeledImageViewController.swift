@@ -21,13 +21,42 @@ class LabeledImageViewController: UIViewController {
     @IBOutlet var labeledImage: UIImageView!
 
     var alertController: UIAlertController?
+    let textFieldDelegate = AlertTextFieldDelegate()
 
     override func viewDidLoad() {
         sourceWordLabel.text = sourceWord
         translatedWordLabel.text = translatedWord
         labeledImage.image = image
     }
-
+    @IBAction func editLabel(_ sender: UIButton) {
+        self.alertController = UIAlertController(title: "Change Label", message: "What should this be labeled?", preferredStyle: .alert)
+        let addLabel = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            self?.changeLabel()
+        }
+        
+        addLabel.isEnabled = false
+        
+        let cancelLabel = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        
+        self.alertController?.addTextField { textField in
+            textField.delegate = self.textFieldDelegate
+            textField.placeholder = "Enter label for Image"
+            textField.addTarget(self, action: #selector(self.guardInputLength), for: .editingChanged)
+        }
+        
+        self.alertController?.addAction(addLabel)
+        self.alertController?.addAction(cancelLabel)
+        
+        guard let alert = self.alertController else { return }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func guardInputLength(_ sender: UITextField) {
+        alertController?.actions[0].isEnabled = textFieldDelegate.textFieldDidChange(sender)
+    }
+    
     @IBAction func deleteImage(_ sender: UIButton) {
         let title: String
         if let word = sourceWord {
@@ -68,6 +97,32 @@ class LabeledImageViewController: UIViewController {
             try FileManager.default.removeItem(at: urlPath)
         } catch {
             print("Could not remove file at \(urlPath.absoluteString): \(error)")
+        }
+    }
+
+    private func changeLabel() {
+        guard
+            let filePath = self.filePath,
+            let label = self.alertController?.textFields?[0].text,
+            var imageLabelDict = UserDefaults.standard.dictionary(forKey: StorageController.imagePathKey) as? [String : String]
+        else { return }
+        
+        imageLabelDict[filePath] = label
+        UserDefaults.standard.set(imageLabelDict, forKey: StorageController.imagePathKey)
+        self.sourceWord = label
+        self.translatedWord = ""
+        
+        DispatchQueue.main.async {
+            self.translatedWordLabel.text = ""
+            self.sourceWordLabel.text = label
+        }
+        
+        let params = ROGoogleTranslateParams(source: "en", target: LanguageAPI.languageValue, text: label)
+        ROGoogleTranslate.translate(params: params, guarded: false) { translation in
+            DispatchQueue.main.async {
+                self.translatedWordLabel.text = translation
+            }
+            self.translatedWord = translation
         }
     }
 }

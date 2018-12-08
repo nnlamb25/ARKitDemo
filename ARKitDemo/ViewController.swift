@@ -31,7 +31,7 @@ struct SelectedMLModel {
     static var indexPath = 0
 }
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBAction func settingAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let secondVC = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
@@ -51,8 +51,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     // Create a session configuration
     var configuration = ARImageTrackingConfiguration()
 
-    private var maxCharactersAllowedForLabel = 20
     private let fileManager = FileManager.default
+    private lazy var textFieldDelegate = AlertTextFieldDelegate()
 
     var imageAnchors = Set<ARReferenceImage>() {
             didSet{
@@ -216,9 +216,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                 let cancelLabel = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
                 
                 self.alertController?.addTextField { textField in
-                    textField.delegate = self
+                    textField.delegate = self.textFieldDelegate
                     textField.placeholder = "Enter label for Image"
-                    textField.addTarget(self, action: #selector(self.alertTextFieldDidChange), for: .editingChanged)
+                    textField.addTarget(self, action: #selector(self.guardInputLength), for: .editingChanged)
                 }
 
                 self.alertController?.addAction(addLabel)
@@ -235,6 +235,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             guard let alert = self.alertController else { return }
             self.present(alert, animated: true, completion: nil)
         }
+    }
+
+    @objc
+    private func guardInputLength(_ sender: UITextField) {
+        alertController?.actions[0].isEnabled = textFieldDelegate.textFieldDidChange(sender)
     }
 
     // Makes node for the translation label, position and scale should be from its label node
@@ -262,25 +267,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             arImage.name = text
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
         }
-    }
-
-    // Ensures user cannot enter in an empty string
-    @objc
-    private func alertTextFieldDidChange(_ sender: UITextField) {
-        guard let count = sender.text?.replacingOccurrences(of: " ", with: "").count else {
-            alertController?.actions[0].isEnabled = true
-            return
-        }
-
-        alertController?.actions[0].isEnabled = count > 0
-    }
-
-    // Ensures user cannot enter in too many characters
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentCharacterCount = textField.text?.count ?? 0
-        guard range.length + range.location <= currentCharacterCount else { return false}
-        let newLength = currentCharacterCount + string.count - range.length
-        return newLength <= maxCharactersAllowedForLabel
     }
 
     private func loadImageAnchors() {
