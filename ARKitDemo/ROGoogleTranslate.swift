@@ -29,7 +29,7 @@ open class ROGoogleTranslate {
     var translations: [String: String] = [:]
     
     /// Store here the Google Translate API Key
-    private var apiKey = "**REMOVED**"
+    private var apiKey = "**Removed**"
     private var ddosGuard = true
     
     ///

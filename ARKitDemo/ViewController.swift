@@ -18,6 +18,10 @@ struct languageAPI {
     static var indexPath = 0
 }
 
+struct SelectedMLModel {
+    static var model = "Office"
+    static var indexPath = 0
+}
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITextFieldDelegate {
     @IBAction func settingAction(_ sender: Any) {
@@ -89,6 +93,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         // Run the view's session
         self.sceneView.session.run(configuration)
+        model.updateModel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
