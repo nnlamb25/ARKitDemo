@@ -161,7 +161,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = countryNameArr[indexPath.row]
         }
         
-        if (cell.textLabel?.text == languageAPI.languageKey) {
+        if (cell.textLabel?.text == LanguageAPI.languageKey) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -181,9 +181,9 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
         //getting the text of that cell
         let currentItem = currentCell.textLabel!.text
         
-        languageAPI.languageKey = currentItem ?? "Afrikaans"
-        languageAPI.languageValue = LanguageViewController.langDict[currentItem!] ?? "af"
-        languageAPI.indexPath = (indexPath?.row)!
+        LanguageAPI.languageKey = currentItem ?? "Afrikaans"
+        LanguageAPI.languageValue = LanguageViewController.langDict[currentItem!] ?? "af"
+        LanguageAPI.indexPath = (indexPath?.row)!
         currentCell.accessoryType = .checkmark
         tableView.reloadData()
     }

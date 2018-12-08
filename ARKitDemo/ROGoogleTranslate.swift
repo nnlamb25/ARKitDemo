@@ -17,7 +17,7 @@ public struct ROGoogleTranslateParams {
     }
     
     public var source = "en"
-    public var target = languageAPI.languageValue
+    public var target = LanguageAPI.languageValue
     public var text = "Hello, World!"
 }
 
@@ -26,15 +26,15 @@ public struct ROGoogleTranslateParams {
 open class ROGoogleTranslate {
     
     // A dictionary of translations with their label as the key
-    var translations: [String: [String: String]] = UserDefaults.standard.dictionary(forKey: "translations") as? [String: [String: String]] ?? [:]{
+    static var translations: [String: [String: String]] = UserDefaults.standard.dictionary(forKey: "translations") as? [String: [String: String]] ?? [:]{
         didSet {
             UserDefaults.standard.set(translations, forKey: "translations")
         }
     }
     
     /// Store here the Google Translate API Key
-    private var apiKey = "AIzaSyCqaFXCzC5eggYyRf04ftWvxV7AXDwNOlc" // "***REMOVED***"
-    private var ddosGuard = true
+    private static var apiKey = "AIzaSyCqaFXCzC5eggYyRf04ftWvxV7AXDwNOlc" // "***REMOVED***"
+    private static var ddosGuard = true
     
     ///
     /// Translate a phrase from one language into another
@@ -42,16 +42,16 @@ open class ROGoogleTranslate {
     /// - parameter params:   ROGoogleTranslate Struct contains all the needed parameters to translate with the Google Translate API
     /// - parameter callback: The translated string will be returned in the callback
     ///
-    open func translate(params:ROGoogleTranslateParams, callback: @escaping (_ translatedText: String?) -> ()) {
+    static func translate(params:ROGoogleTranslateParams, guarded: Bool = true, callback: @escaping (_ translatedText: String?) -> ()) {
         // Make sure we haven't already translated this before, if so just use that translation
-        if let repeatedTranslation = translations[params.target]?[params.text] {
+        if let repeatedTranslation = ROGoogleTranslate.translations[params.target]?[params.text] {
             callback(repeatedTranslation)
             return
         }
 
 
         guard
-            ddosGuard,
+            ddosGuard || !guarded,
             let urlEncodedText = params.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=\(apiKey)&q=\(urlEncodedText)&source=\(params.source)&target=\(params.target)&format=text")
         else { callback(nil); return }
@@ -103,8 +103,8 @@ open class ROGoogleTranslate {
         ddosGuard = false
         httprequest.resume()
 
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [weak self] _ in
-            self?.ddosGuard = true
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+            ddosGuard = true
         }
     }
 }

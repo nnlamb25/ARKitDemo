@@ -11,7 +11,7 @@ import UIKit
 
 class TranslationTableViewCell: UITableViewCell {
     @IBOutlet var sourceWordLabel: UILabel!
-    @IBOutlet var targetWordLabel: UILabel!
+    @IBOutlet var translatedWordLabel: UILabel!
     @IBOutlet var labeledImage: UIImageView!
     
     override func setSelected(_ selected: Bool, animated: Bool) {

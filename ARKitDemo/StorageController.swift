@@ -16,7 +16,7 @@ public class StorageController {
     private let fileManager = FileManager.default
     private let userDefaults = UserDefaults.standard
 
-    let imagePathKey = "imagePaths"
+    static let imagePathKey = "imagePaths"
     
     // Saved an image with its label
     public func saveImageWithLabel(pixelBuffer: CVPixelBuffer, label: String) {
@@ -62,11 +62,11 @@ public class StorageController {
             print("Could not write image to filePath: \(filePath.path)")
         }
 
-        if var imageLabelDict = userDefaults.dictionary(forKey: imagePathKey) as? [String : String] {
+        if var imageLabelDict = userDefaults.dictionary(forKey: StorageController.imagePathKey) as? [String : String] {
             imageLabelDict[uuid] = label
-            userDefaults.setValue(imageLabelDict, forKey: imagePathKey)
+            userDefaults.setValue(imageLabelDict, forKey: StorageController.imagePathKey)
         } else {
-            userDefaults.setValue([uuid: label], forKey: imagePathKey)
+            userDefaults.setValue([uuid: label], forKey: StorageController.imagePathKey)
         }
     }
 }

@@ -12,7 +12,7 @@ import SceneKit
 import UIKit
 import VideoToolbox
 
-struct languageAPI {
+struct LanguageAPI {
     static var languageKey: String = UserDefaults.standard.string(forKey: "languageKey") ?? "Afrikaans" {
         didSet {
             UserDefaults.standard.set(languageKey, forKey: "languageKey")
@@ -60,6 +60,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Main"
+
+        // Load previous images
+        loadImageAnchors()
+
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -81,8 +85,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             print("Camera not available")
         }
-
-        loadImageAnchors()
     }
 
     @objc
@@ -145,7 +147,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         node.addChildNode(labelNode)
 
-        if let translation = translator.translations[languageAPI.languageValue]?[name] {
+        if let translation = ROGoogleTranslate.translations[LanguageAPI.languageValue]?[name] {
             node.addChildNode(makeTranslationNode(translation, position: labelNode.position, scale: labelNode.scale))
         }
 
@@ -160,10 +162,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             let imageAnchor = anchor as? ARImageAnchor,
             let label = imageAnchor.name
         else { return }
-//        print(languageAPI.languageValue)
+//        print(LanguageAPI.languageValue)
         // If there was no translation, try to set it now
-        let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: label)
-        self.translator.translate(params: params) { [weak self] translation in
+        let params = ROGoogleTranslateParams(source: "en", target: LanguageAPI.languageValue, text: label)
+        ROGoogleTranslate.translate(params: params) { [weak self] translation in
             guard
                 let `self` = self,
                 let translation = translation,
@@ -247,9 +249,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     // Translates the text sets the image anchor and translation
     private func translate(_ text: String, for arImage: ARReferenceImage) {
-//        print(languageAPI.languageValue)
-        let params = ROGoogleTranslateParams(source: "en", target: languageAPI.languageValue, text: text)
-        self.translator.translate(params: params) { _ in
+//        print(LanguageAPI.languageValue)
+        let params = ROGoogleTranslateParams(source: "en", target: LanguageAPI.languageValue, text: text)
+        ROGoogleTranslate.translate(params: params) { _ in
             arImage.name = text
             self.imageAnchors = self.imageAnchors.union(Set([arImage]))
         }
@@ -276,7 +278,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     private func loadImageAnchors() {
         guard
-            let imagePathDict = UserDefaults.standard.dictionary(forKey: storageContoller.imagePathKey) as? [String: String],
+            let imagePathDict = UserDefaults.standard.dictionary(forKey: StorageController.imagePathKey) as? [String: String],
             let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
         else { return }
 
