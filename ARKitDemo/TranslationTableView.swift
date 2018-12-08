@@ -12,7 +12,7 @@ import UIKit
 class TranslationTableView: UITableViewController {
 
     var translations = UserDefaults.standard.dictionary(forKey: "translations") as? [String: [String: String]] ?? [String: [String: String]]()
-    var imagesAndLabels = [(image: UIImage, label: String)]()
+    var imagesAndLabels = [(image: UIImage, label: String, filePath: String)]()
 
     // Populates imagesAndLabels from storage
     override func viewDidLoad() {
@@ -31,6 +31,7 @@ class TranslationTableView: UITableViewController {
         let language = UserDefaults.standard.string(forKey: "languageValue")
         cell.sourceWordLabel.text = imagesAndLabels[index].label
         cell.labeledImage.image = imagesAndLabels[index].image
+        cell.filePath = imagesAndLabels[index].filePath
 
         if let languageKey = language,
             let translatedWord = translations[languageKey]?[imagesAndLabels[index].label] {
@@ -63,13 +64,6 @@ class TranslationTableView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! TranslationTableViewCell
-        let labeledImageVC = LabeledImageViewController()
-
-        labeledImageVC.sourceWordLabel = cell.sourceWordLabel
-        labeledImageVC.translatedWordLabel = cell.sourceWordLabel
-        labeledImageVC.labeledImage = cell.labeledImage
-
         self.performSegue(withIdentifier: "selectedImage", sender: self)
     }
 
@@ -84,9 +78,11 @@ class TranslationTableView: UITableViewController {
         labeledImageVC.sourceWord = cell.sourceWordLabel.text
         labeledImageVC.translatedWord = cell.translatedWordLabel.text
         labeledImageVC.image = cell.labeledImage.image
+        labeledImageVC.filePath = cell.filePath
     }
 
     private func setUpTable() {
+        imagesAndLabels.removeAll(keepingCapacity: true)
         guard
             let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
             let imagePathLabels = UserDefaults.standard.dictionary(forKey: StorageController.imagePathKey) as? [String: String]
@@ -103,27 +99,11 @@ class TranslationTableView: UITableViewController {
             }
             // Need to orient the image correctly
             let image = UIImage(cgImage: cgImage, scale: uiImage.scale, orientation: .right)
-            imagesAndLabels.append((image, label))
+            imagesAndLabels.append((image, label, path))
         }
         
         // Sorts alphabetically by label
         imagesAndLabels.sort(by: { $0.label < $1.label })
+        tableView.reloadData()
     }
-    
-//    override func tableView(_ tableView: UITableView, commit editingStyle:
-//        UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            count -= 1
-//            self.translations.removeValue(forKey: "bs")
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-
-//    @IBAction func deleteCell(_ sender: UIButton) {
-//        let buttonPosition = sender.convert(sender.bounds.origin, to: tableView)
-//        guard let indexPath = tableView.indexPathForRow(at: buttonPosition) else { return }
-//        count -= 1
-//        self.translations.removeValue(forKey: "bs")
-//        tableView.deleteRows(at: [indexPath], with: .fade)
-//    }
 }
