@@ -321,23 +321,17 @@
                                 </constraints>
                             </view>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQN-UI-6Kk">
-                                <rect key="frame" x="47" y="513" width="320" height="216"/>
+                                <rect key="frame" x="47" y="646" width="320" height="216"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVQ-kg-BlP">
-                                <rect key="frame" x="190" y="759" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="HeW-xR-3tI" firstAttribute="bottom" secondItem="jQN-UI-6Kk" secondAttribute="bottom" id="7oa-zy-wh3"/>
                             <constraint firstItem="jQN-UI-6Kk" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="IQu-3c-Yky"/>
-                            <constraint firstItem="sVQ-kg-BlP" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="NIC-8C-8f0"/>
                             <constraint firstItem="nE8-JD-qxq" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="TJp-pv-Faf"/>
                             <constraint firstItem="fkY-ex-eTN" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="Xlz-f4-gdC"/>
                             <constraint firstItem="nE8-JD-qxq" firstAttribute="top" secondItem="fkY-ex-eTN" secondAttribute="bottom" constant="20" id="Y0j-c1-vgB"/>
-                            <constraint firstItem="jQN-UI-6Kk" firstAttribute="top" secondItem="nE8-JD-qxq" secondAttribute="bottom" constant="20" id="chK-qF-9Za"/>
                             <constraint firstItem="fkY-ex-eTN" firstAttribute="top" secondItem="HeW-xR-3tI" secondAttribute="top" constant="100" id="he6-Pn-nqz"/>
-                            <constraint firstItem="sVQ-kg-BlP" firstAttribute="top" secondItem="jQN-UI-6Kk" secondAttribute="bottom" constant="30" id="ygO-ru-bCb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HeW-xR-3tI"/>
                     </view>

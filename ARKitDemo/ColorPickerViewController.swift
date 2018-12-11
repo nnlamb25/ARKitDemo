@@ -10,6 +10,7 @@ import UIKit
 
 class ColorPickerViewController: UIViewController, SwiftHUEColorPickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     let labelType = ["Original Text","Translated Text"]
+    var pickerName = ""
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return labelType.count
@@ -21,6 +22,10 @@ class ColorPickerViewController: UIViewController, SwiftHUEColorPickerDelegate, 
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return labelType[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerName = labelType[row] as String
     }
     
     @IBOutlet weak var colorView: UIView!
@@ -36,14 +41,27 @@ class ColorPickerViewController: UIViewController, SwiftHUEColorPickerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pickerName = labelType[0]
         self.title = "Color Picker"
         self.typePicker.delegate = self
         self.typePicker.dataSource = self
-        
+
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(tapButtion))
+        self.navigationItem.rightBarButtonItem = saveButton
 
         horizontalColorPicker.delegate = self
         horizontalColorPicker.direction = SwiftHUEColorPicker.PickerDirection.horizontal        
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func tapButtion() {
+        if (pickerName == "Original Text") {
+            ColorLabel.originalText = colorView.backgroundColor!
+        }
+        
+        if (pickerName == "Translated Text") {
+            ColorLabel.translatedText = colorView.backgroundColor!
+        }
     }
     
     
