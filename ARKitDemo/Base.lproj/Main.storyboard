@@ -263,19 +263,31 @@
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="About"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHY-Wy-zjj" userLabel="Select Model">
+                                <rect key="frame" x="77" y="569" width="260" height="36"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Color Picker"/>
+                                <connections>
+                                    <segue destination="tjW-v4-bj0" kind="show" id="Tmf-GB-hKj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rMG-tS-hgZ" firstAttribute="top" secondItem="UMd-tQ-Jxh" secondAttribute="bottom" constant="20" id="2H9-O8-XlR"/>
                             <constraint firstItem="qKS-M2-keZ" firstAttribute="centerX" secondItem="DWg-2v-F3I" secondAttribute="centerX" id="Bbj-Py-WlE"/>
+                            <constraint firstItem="XHY-Wy-zjj" firstAttribute="width" secondItem="rMG-tS-hgZ" secondAttribute="width" id="D9B-SG-yX1"/>
                             <constraint firstItem="qKS-M2-keZ" firstAttribute="height" secondItem="UMd-tQ-Jxh" secondAttribute="height" id="HSS-fL-fSm"/>
                             <constraint firstItem="rMG-tS-hgZ" firstAttribute="width" secondItem="UMd-tQ-Jxh" secondAttribute="width" id="Tey-Sl-C02"/>
                             <constraint firstItem="UMd-tQ-Jxh" firstAttribute="centerY" secondItem="DWg-2v-F3I" secondAttribute="centerY" id="WNM-C5-Q0r"/>
+                            <constraint firstItem="XHY-Wy-zjj" firstAttribute="top" secondItem="rMG-tS-hgZ" secondAttribute="bottom" constant="20" id="YCJ-35-1Xp"/>
                             <constraint firstItem="UMd-tQ-Jxh" firstAttribute="centerX" secondItem="DWg-2v-F3I" secondAttribute="centerX" id="YZy-AK-Yf3"/>
                             <constraint firstItem="rMG-tS-hgZ" firstAttribute="height" secondItem="UMd-tQ-Jxh" secondAttribute="height" id="bEo-bW-yMY"/>
                             <constraint firstItem="UMd-tQ-Jxh" firstAttribute="top" secondItem="qKS-M2-keZ" secondAttribute="bottom" constant="20" id="fT5-S0-wEG"/>
                             <constraint firstItem="rMG-tS-hgZ" firstAttribute="centerX" secondItem="DWg-2v-F3I" secondAttribute="centerX" id="u1X-36-DDp"/>
+                            <constraint firstItem="XHY-Wy-zjj" firstAttribute="centerX" secondItem="DWg-2v-F3I" secondAttribute="centerX" id="uRh-3S-xUV"/>
                             <constraint firstItem="qKS-M2-keZ" firstAttribute="width" secondItem="UMd-tQ-Jxh" secondAttribute="width" id="y28-wy-fA6"/>
+                            <constraint firstItem="XHY-Wy-zjj" firstAttribute="height" secondItem="rMG-tS-hgZ" secondAttribute="height" id="zbq-aJ-zUe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DWg-2v-F3I"/>
                     </view>
@@ -283,6 +295,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQq-Iy-upw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2100" y="-679"/>
+        </scene>
+        <!--Color Picker View Controller-->
+        <scene sceneID="HN1-f5-LZ9">
+            <objects>
+                <viewController storyboardIdentifier="ColorPickerViewController" id="tjW-v4-bj0" customClass="ColorPickerViewController" customModule="ARKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TyU-XQ-pfw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkY-ex-eTN" userLabel="colorView">
+                                <rect key="frame" x="82" y="188" width="250" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="0rJ-i3-fvf"/>
+                                    <constraint firstAttribute="height" constant="250" id="mHy-3s-x03"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nE8-JD-qxq" userLabel="colorPicker" customClass="SwiftHUEColorPicker" customModule="ARKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="57" y="458" width="300" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="9fh-PM-WfW"/>
+                                    <constraint firstAttribute="width" constant="300" id="kLR-nx-oeI"/>
+                                </constraints>
+                            </view>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQN-UI-6Kk">
+                                <rect key="frame" x="47" y="646" width="320" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HeW-xR-3tI" firstAttribute="bottom" secondItem="jQN-UI-6Kk" secondAttribute="bottom" id="7oa-zy-wh3"/>
+                            <constraint firstItem="jQN-UI-6Kk" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="IQu-3c-Yky"/>
+                            <constraint firstItem="nE8-JD-qxq" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="TJp-pv-Faf"/>
+                            <constraint firstItem="fkY-ex-eTN" firstAttribute="centerX" secondItem="HeW-xR-3tI" secondAttribute="centerX" id="Xlz-f4-gdC"/>
+                            <constraint firstItem="nE8-JD-qxq" firstAttribute="top" secondItem="fkY-ex-eTN" secondAttribute="bottom" constant="20" id="Y0j-c1-vgB"/>
+                            <constraint firstItem="fkY-ex-eTN" firstAttribute="top" secondItem="HeW-xR-3tI" secondAttribute="top" constant="100" id="he6-Pn-nqz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HeW-xR-3tI"/>
+                    </view>
+                    <connections>
+                        <outlet property="colorView" destination="fkY-ex-eTN" id="gFA-BL-ZEq"/>
+                        <outlet property="horizontalColorPicker" destination="nE8-JD-qxq" id="JzC-94-exg"/>
+                        <outlet property="typePicker" destination="jQN-UI-6Kk" id="kLd-pZ-sQg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fCO-7S-K3j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2924.6376811594205" y="-1698.2142857142856"/>
         </scene>
         <!--Language View Controller-->
         <scene sceneID="Rb2-3q-K3M">

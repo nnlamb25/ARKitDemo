@@ -26,6 +26,11 @@ struct LanguageAPI {
     static var indexPath = 0
 }
 
+struct ColorLabel {
+    static var originalText: UIColor = UIColor.green
+    static var translatedText: UIColor = UIColor.brown
+}
+
 struct SelectedMLModel {
     static var model = "Office"
     static var indexPath = 0
@@ -130,7 +135,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let name = (imageAnchor.referenceImage.name ?? "object")//.replacingOccurrences(of: " ", with: "\n")
 
         let label = SCNText(string: name, extrusionDepth: 0)
-        label.firstMaterial?.diffuse.contents = UIColor.brown // UIColor.black
+        label.firstMaterial?.diffuse.contents = ColorLabel.originalText // UIColor.black
         label.firstMaterial?.specular.contents = UIColor.black
         label.firstMaterial?.shininess = 0.75
 //            label.firstMaterial?.transparency = 0.4
@@ -245,7 +250,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     // Makes node for the translation label, position and scale should be from its label node
     private func makeTranslationNode(_ text: String, position: SCNVector3, scale: SCNVector3) -> SCNNode {
         let translationLabel = SCNText(string: text, extrusionDepth: 0)
-        translationLabel.firstMaterial?.diffuse.contents = UIColor.green
+        translationLabel.firstMaterial?.diffuse.contents = ColorLabel.translatedText
         translationLabel.firstMaterial?.specular.contents = UIColor.black
         translationLabel.firstMaterial?.shininess = 0.75
         translationLabel.subdivisionLevel = 2
